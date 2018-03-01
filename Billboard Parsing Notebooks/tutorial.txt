@@ -1,8 +1,8 @@
 #Starting mongo
 #mongo server
-mongod --dbpath D:\MongoDB\data\bd #database locations
-mongo #in terminal
-
+mongod
+#begin mongo instance
+mongo
 
 
 #Remember the difference between DATABASES and COLLECTIONS
