@@ -11,6 +11,14 @@ class Main extends React.Component {
    }
 }
 
+class Button extends React.Component {
+  render(){
+     return (
+        <h1>Button Goes Here</h1>
+     );
+  }
+}
+
 WebFont.load({
    google: {
       families: ['Playfair Display', 'serif']
