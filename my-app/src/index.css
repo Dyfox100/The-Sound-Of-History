@@ -1,0 +1,10 @@
+/* @fontface {
+  font-family: 'Domine', serif;
+  src: url('https://fonts.googleapis.com/css?family=Domine:400,700')
+} */
+
+body {
+  font-family: 'Playfair Display', serif;
+  text-align: center;
+  font-size: 1.5em;
+}
