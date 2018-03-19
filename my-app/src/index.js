@@ -1,16 +1,20 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import WebFont from 'webfontloader';
-// npm install --save reactstrap@next react react-dom
-import { Button } from 'reactstrap';
+
+import 'bootstrap/dist/css/bootstrap.css';
+import { InputGroup, InputGroupAddon, Button, Input } from 'reactstrap';
+
+import logo from './soundOfMusic.png'
 import './index.css';
 
-class Main extends React.Component {
+class Home extends React.Component {
   render(){
     return (
       <div>
-        <h1>The Sound of History</h1>
-        <Button color="primary" size="lg"> Search </Button>
+        <img src={logo} class="title"/>
+        <br/>
+        <Search/>
       </div>
     );
   }
@@ -18,9 +22,16 @@ class Main extends React.Component {
 
 class Search extends React.Component {
   render(){
-     return (
-        <h1>Button Goes Here</h1>
-     );
+    return (
+      <div id="searchBox">
+        <InputGroup>
+          <Input placeholder="Enter a date, song, or event" />
+          <InputGroupAddon addonType="append">
+            <Button color="secondary"> Search </Button>
+          </InputGroupAddon>
+        </InputGroup>
+      </div>
+    );
   }
 }
 
@@ -31,6 +42,6 @@ WebFont.load({
 });
 
 ReactDOM.render(
-   <Main />,
+   <Home />,
    document.getElementById('root')
 );
