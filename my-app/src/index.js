@@ -5,7 +5,7 @@ import WebFont from 'webfontloader';
 import 'bootstrap/dist/css/bootstrap.css';
 import { InputGroup, InputGroupAddon, Button, Input } from 'reactstrap';
 
-import logo from './soundOfMusic.png'
+import logo from './img/soundOfMusic.png'
 import './index.css';
 
 class Home extends React.Component {
@@ -15,6 +15,8 @@ class Home extends React.Component {
         <img src={logo} class="title"/>
         <br/>
         <Search/>
+        <br/>
+        <Description/>
       </div>
     );
   }
@@ -33,6 +35,16 @@ class Search extends React.Component {
       </div>
     );
   }
+}
+
+class Description extends React.Component {
+   render(){
+      return (
+         <div>
+            <p>Description of Project goes here.</p>
+         </div>
+      );
+   }
 }
 
 WebFont.load({
