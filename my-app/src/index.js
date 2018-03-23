@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import WebFont from 'webfontloader';
 
 import 'bootstrap/dist/css/bootstrap.css';
-import { InputGroup, InputGroupAddon, Button, Input } from 'reactstrap';
+import { InputGroup, InputGroupAddon, Button, Input, NavLink } from 'reactstrap';
 
 import logo from './img/soundOfMusic.png'
 import './index.css';
@@ -23,15 +23,32 @@ class Home extends React.Component {
 }
 
 class Search extends React.Component {
+  constructor(){
+    super();
+    this.state = {
+      text: 'Temp Value'
+    };
+  }
+
+  updateSearch(){
+    this.setState( { text: this.refs.searchField.value } );
+    console.log("loading");
+  }
+
   render(){
     return (
       <div id="searchBox">
         <InputGroup>
-          <Input placeholder="Enter a date, song, or event" />
+          <Input placeholder="Enter a date, song, or event" ref="searchField" type="text"/>
           <InputGroupAddon addonType="append">
-            <Button color="secondary"> Search </Button>
+            <Button color="secondary"
+              onClick={ (e) => { this.updateSearch(); } }>
+              <NavLink> Search </NavLink>
+            </Button>
           </InputGroupAddon>
         </InputGroup>
+        <br/>
+        {this.state.text}
       </div>
     );
   }
