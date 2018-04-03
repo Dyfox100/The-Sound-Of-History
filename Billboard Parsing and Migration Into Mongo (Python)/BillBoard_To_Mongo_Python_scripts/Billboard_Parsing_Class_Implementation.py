@@ -20,7 +20,7 @@ class BillBoardParser:
     Return Value: Constructed Object.
     """
 
-    def __init__(self, host='localhost', top_100_num_years_to_get=50, top_100_weekly_num_songs_to_get=15, top_200_num_songs_to_get=200):
+    def __init__(self, host='localhost', top_100_num_years_to_get=10, top_100_weekly_num_songs_to_get=50, top_200_num_songs_to_get=200):
 
         self._host = host
 
