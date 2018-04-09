@@ -1,0 +1,4 @@
+# EC2 instance information
+*.pem
+*.ppk
+keys.yaml

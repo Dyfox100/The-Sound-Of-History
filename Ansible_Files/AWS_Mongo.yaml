@@ -1,0 +1,37 @@
+# Create the AWS instance and install MongoDB
+
+
+---
+  - hosts: localhost
+    connection: local
+    gather_facts: no
+
+    tasks:
+      - name: creating EC2 instace
+        ec2:
+          key_name: Elastic_Bodie_Machine
+          instance_type: t2.micro
+          aws_access_key: "AKIAJMXYDEHGHHIQY47Q"
+          aws_secret_key: "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"
+          image: ami-d874e0a0
+          wait: yes
+          group: Test-wizard-16
+          instance_tags:
+            "Name": "Boaty_Test"
+            "Team Name": "Boat-y"
+          exact_count: 1 # Specifies that only one will be up at any time
+          count_tag:
+            Name: mongo-server
+          region: us-west-2
+        register: ec2_out
+
+      - name: Wait for SSH to come up
+        wait_for: host={{ item.public_ip }} port=22 delay=10 timeout=320 state=started
+        with_items: ec2.instances
+
+      - name: Add the host to the group to be provisioned
+        add_host: name={{ item.public_ip }} groupname=to_be_provisioned
+        with_items: ec2.instances
+
+  - hosts: Install MongoDB
+    
