@@ -1,23 +1,23 @@
 # ansible-playbook -i hosts example.yaml
 # This is a file to begin an EC2 instance
 --- # tell ansible that it's a yaml file
-- name: Example # name of
-  hosts: local
+- name: Example # name of instance
+  hosts: local # What "group" this instance belongs to
 
-  tasks:
+  tasks: # What it will do
 
-    - name: ExampleEC2
-      ec2:
-        key_name: Elastic_Bodie_Machine
-        instance_type: t2.micro
-        aws_access_key: "AKIAJMXYDEHGHHIQY47Q"
+    - name: ExampleEC2 # name of first task
+      ec2: # ec2 module, tells it that it's creating an EC2 instance
+        key_name: Elastic_Bodie_Machine #Security group key
+        instance_type: t2.micro # What size instance it will run on
+        aws_access_key: "AKIAJMXYDEHGHHIQY47Q" # Our login info. I REALLY DON'T LIKE HAVING THIS ON THE GITHUB BUT OK.
         aws_secret_key: "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"
-        image: ami-d874e0a0
-        wait: yes
-        group: Test-wizard-16
-        count: 1
-        instance_tags:
-          "Name": "Boaty_Test"
-          "Team Name": "Boat-y"
-        region: us-west-2
-      register: ec2_out
+        image: ami-d874e0a0 # What type of EC2 instance it will be
+        wait: yes # tells it to not do anything until it's done with this task
+        group: Test-wizard-16 # Not really sure
+        count: 1 # How many instnaces will be created
+        instance_tags: # Tags for us to search for our instance.
+          "Name": "Boaty_Test" # The name of the instance.
+          "Team Name": "Boat-y" # Our team name for the instance
+        region: us-west-2 # What region the instance is created in
+      register: ec2_out # An output log of everything that is happening
