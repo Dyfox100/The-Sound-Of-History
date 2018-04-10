@@ -1,0 +1,26 @@
+<!doctype HTML>
+
+<head>
+  <title>New York Times API Test</title>
+</head>
+
+<script type='text/javascript'>
+  var xhr = new XMLHttpRequest();
+  const url = "https://api.nytimes.com/svc/search/v2/articlesearch.json";
+  const apiKey = "5a1867eea1154ea0a495d421ea1263a4";
+  //serialized begin and end dates (begin_date, end_date)
+  const params = "&begin_date=20000101&end_date=20040507";
+  const longUrl = url + "?api-key=" + apiKey + params;
+
+  xhr.responseType = 'json';
+
+  xhr.onreadystatechange = function() {
+    if (xhr.readyState === XMLHttpRequest.DONE){
+      console.log(xhr.response);
+    }
+  }
+
+  xhr.open('GET', longUrl);
+  xhr.send();
+
+  </script>
