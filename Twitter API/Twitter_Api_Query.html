@@ -5,18 +5,27 @@
 </head>
 
 <script type='text/javascript'>
+//Gets headlines for a date from the NYTimes API
   var xhr = new XMLHttpRequest();
+  xhr.responseType = 'text';
+
   const url = "https://api.nytimes.com/svc/search/v2/articlesearch.json";
   const apiKey = "5a1867eea1154ea0a495d421ea1263a4";
   //serialized begin and end dates (begin_date, end_date)
-  const params = "&begin_date=20000101&end_date=20040507";
+  const params = "&begin_date=20000110&end_date=20010113";
+  //full url to query
   const longUrl = url + "?api-key=" + apiKey + params;
-
-  xhr.responseType = 'json';
 
   xhr.onreadystatechange = function() {
     if (xhr.readyState === XMLHttpRequest.DONE){
-      console.log(xhr.response);
+      let responseJSON = JSON.parse(xhr.responseText).response;
+      //returns 10 articles, so display all the headlines + kickers (
+      //kickers = little bits after the headline like in the following example
+      //"Something Important: it really is", it really is is the kicker)
+      for (var index = 0; index < 10; index++) {
+        let document = responseJSON.docs[index];
+        console.log(document.headline.main + ": " + document.headline.kicker);
+      }
     }
   }
 
