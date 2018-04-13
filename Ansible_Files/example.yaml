@@ -1,6 +1,7 @@
 # ansible-playbook -i hosts example.yaml
 # This is a file to begin an EC2 instance
-# ssh -i Boaty-test.pem ec2-user@54.191.243.40
+# cd /mnt
+# ssh -i Boaty-test.pem ec2-user@((PUT EC2 IPV4 HERE))
 # is the ubuntu command to ssh into the EC2 instance
 --- # tell ansible that it's a yaml file
 - name: Example # name of file
@@ -12,7 +13,7 @@
 
   tasks: # What it will do
 
-    - name: Create ExampleEC2 instance # Name of task
+    - name: Create EC2 instance # Name of task
       ec2:
         key_name: Boaty-test # name of pem
         instance_type: t2.micro # instance size
@@ -25,7 +26,7 @@
         count_tag: # What instances are being monitored
           Name: Boaty_Test
         instance_tags: # Tags to search for instance
-          "Name": "Boaty_Test"
+          "Name": "Boaty_Mongo_Test"
           "Team Name": "Boat-y"
         region: us-west-2 # Region that instance is created in
       register: ec2_out # Output of instance variables
@@ -34,20 +35,24 @@
     #     msg: "{{ec2_out}}" # this is how variables are used
 
     - name: Generate local_ip
-      set_fact: #
+      set_fact:
         ec2_ip: "{{ec2_out['tagged_instances'][0]['public_ip']}}" # Gets the ip of the ec2 instance
+        # ec2_ip: 34.211.71.178
 
-    - name: Add a machine to the host list
+    - name: Add a host to the group to_be_provisioned
       add_host: # Add a host for who will perform actions
         hostname: "{{ec2_ip}}" # The ip of the EC2 instance so the instance is the one doing this stuff
         ansible_ssh_private_key_file: Boaty-test.pem
         ansible_user: ec2-user
+        groupname: to_be_provisioned
+        with_items: ec2.instances
 
     - name: Wait for SSH # Need to wait for server to startup before ssh'ing into it
       wait_for:
         host: "{{ec2_ip}}" # Who is SSHing
         port: 22 # port for ssh
         state: started
+        # delay: 10
 
     - name: Make a temp file # Canary to see if we are in the instance
       file:
@@ -55,4 +60,22 @@
         state: touch # What the instance is doing
       delegate_to: "{{ec2_ip}}" # What host is performing this action
 
-    - name: install mongo # Actually what I need to do
+- name: Setting up Mongo
+  hosts: to_be_provisioned
+  sudo: yes
+
+  tasks:
+
+    - name: Configure yum to install mongo package at /etc/yum.repos.d/mongodb-org-3.6.repo # Actually what I need to do
+      copy:
+        dest: /etc/yum.repos.d/mongodb-org-3.6.repo
+        force: no
+        content: |
+          [mongodb-org-3.6]
+          name=MongoDB Repository
+          baseurl=https://repo.mongodb.org/yum/amazon/2013.03/mongodb-org/3.6/x86_64/
+          gpgcheck=1
+          enabled=1
+          gpgkey=https://www.mongodb.org/static/pgp/server-3.6.asc
+
+    # - name: Yum install mongo
