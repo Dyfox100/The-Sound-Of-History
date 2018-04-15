@@ -5,14 +5,16 @@ import WebFont from 'webfontloader';
 import 'bootstrap/dist/css/bootstrap.css';
 import { InputGroup, InputGroupAddon, Button, Input, NavLink } from 'reactstrap';
 
-import './index.css';
+// import './index.css';
 
-class ResultsPage extends React.Component {
-    var queriedItems = "";
-
+export class ResultsPage extends React.Component {
+    //var queriedItems = "";
     render(){
+        const history = ['1', '2','3','4','5','6','7','8','9','10']
         return (
-
+            <div>
+                <HistoryBox history = {history}/>
+            </div>
         );
     }
     displays(){
@@ -20,50 +22,65 @@ class ResultsPage extends React.Component {
     }
 }
 
-class DateBox extends React.Component {
-    var date = "";
+// class DateBox extends React.Component {
+//     var date = "";
+
+//     render(){
+//         return (
+
+//         );
+//     }
+//     getDate(){
+
+//     }
+//     setDate(){
+
+//     }
+// }
+
+// class SongBox extends React.Component {
+//     var songList = "";
+
+//     render(){
+//         return (
+
+//         );
+//     }
+//     setSongList(){
+
+//     }
+//     getSongList(){
+
+//     }
+// }
+
+class HistoryBox extends React.Component {
+    constructor(props){
+        super(props);
+        this.history = this.props.history;
+    }
 
     render(){
         return (
+            <div>
+                <h1>
+                    {this.history[0]}
+                </h1>
+                <ul>{
+                    this.history.slice(1,10).map((item) => {
+                        return<li> {item}</li>
+                    })
+                }
+                </ul>
 
+            </div>
         );
     }
-    getDate(){
+
+    setHistory(){
 
     }
-    setDate(){
-
-    }
-}
-
-class SongBox extends React.Component {
-    var songList = "";
-
-    render(){
-        return (
-
-        );
-    }
-    setSongList(){
-
-    }
-    getSongList(){
-
-    }
-}
-
-class TweetBox extends React.Component {
-    var tweet = "";
-
-    render(){
-        return (
-
-        );
-    }
-    setTweet(){
-
-    }
-    getTweet(){
+    getHistory(){
 
     }
 }
@@ -74,7 +91,3 @@ WebFont.load({
     }
 });
 
-ReactDOM.render(
-   <ResultsPage />,
-   document.getElementById('root')
-);
