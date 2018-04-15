@@ -23,12 +23,16 @@ export class ResultsPage extends React.Component {
            lastWeek2: "This is last week 2",
            weeksOnChart2: "This is weeks 2"
         };
+        const date = "2017-04-30";
         return (
-            <div>
-                <HistoryBox history = {history}/>
-                <br/>
-                <SongBox songs = {songs}/>
-            </div>
+          <div>
+              <DateBox date= {date}/>
+              <div>
+                  <HistoryBox history = {history}/>
+                  <br/>
+                  <SongBox songs = {songs}/>
+              </div>
+          </div>
         );
     }
     displays(){
@@ -36,21 +40,37 @@ export class ResultsPage extends React.Component {
     }
 }
 
-// export class DateBox extends React.Component {
-//     var date = "";
+export class DateBox extends React.Component {
+    constructor(props) {
+      super(props);
+      this.date = this.props.date;
+      this.parseDates = this.parseDates.bind(this);
+    }
+    parseDates() {
+        let months = ['January', 'February', 'March', 'April', 'May', 'June',
+        'July', 'August', 'September', 'October', 'November', 'December'];
 
-//     render(){
-//         return (
+        let year = this.date.slice(0, 4);
+        let day = this.date.slice(8, 10);
+        let month = months[Number(this.date.slice(5, 7)) -1];
 
-//         );
-//     }
-//     getDate(){
+        return month + " " + day + ", " + year;
+    }
 
-//     }
-//     setDate(){
+    render(){
+        return (
+          <div>
+              <h1>The Sound of {this.parseDates()}</h1>
+          </div>
+        );
+    }
+    getDate(){
 
-//     }
-// }
+    }
+    setDate(){
+
+    }
+}
 
 export class SongBox extends React.Component {
     constructor(props){
@@ -68,28 +88,39 @@ export class SongBox extends React.Component {
 
         // store songs/artists/info in a list of objects
         for (var i=1; i<3; i++){
-            song = "song" + i.toString();
-            artist = "artist" + i.toString();
-            peak = "peakPosition" + i.toString();
-            last = "lastWeek" + i.toString();
-            weeks = this.songs["weeksOnChart" + i.toString()];
-            // var rank = {
-            //
-            // }
-            // songList[i-1] = rank;
+            let songTemp = this.songs["song" + i.toString()];
+            let artistTemp = this.songs["artist" + i.toString()];
+            let peakTemp = this.songs["peakPosition" + i.toString()];
+            let lastTemp = this.songs["lastWeek" + i.toString()];
+            let weeksTemp = this.songs["weeksOnChart" + i.toString()];
+
+            let rank = {
+                song: songTemp,
+                artist: artistTemp,
+                peak: peakTemp,
+                last: lastTemp,
+                weeks: weeksTemp
+            }
+
+            songList.push(rank);
         }
+        return songList;
     }
+
     render(){
         return (
-            <h1>TEST</h1>
-            // <div>
-            //     <ol>{
-            //         this.songs.slice(0,10).map((item) => {
-            //             return<li> {item}</li>
-            //         })
-            //     }
-            //     </ol>
-            // </div>
+          <div>
+            <h1>Songs</h1>
+                <div>
+                    <ol>
+                        {
+                            this.parseSongs().map((songObject) => {
+                                return <li>{songObject.song}</li>
+                        })
+                      }
+                  </ol>
+                </div>
+              </div>
         );
     }
     setSongList(){
