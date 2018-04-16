@@ -82,3 +82,8 @@
       yum:
         name: mongodb-org # What the package name is
         state: latest # What version it should be installed as
+
+    - name: Start the mongod service
+      service:
+        name: mongod # name of service
+        state: started # start the service
