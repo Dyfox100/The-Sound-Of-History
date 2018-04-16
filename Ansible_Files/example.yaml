@@ -66,11 +66,11 @@
 
   tasks:
 
-    - name: Configure yum to install mongo package at /etc/yum.repos.d/mongodb-org-3.6.repo # Actually what I need to do
+    - name: Configure yum to install mongo package at /etc/yum.repos.d/mongodb-org-3.6.repo # Create the yum config directory to designate how to install
       copy:
-        dest: /etc/yum.repos.d/mongodb-org-3.6.repo
-        force: no
-        content: |
+        dest: /etc/yum.repos.d/mongodb-org-3.6.repo # Destination repo
+        force: no # Creates a new file if not there already.
+        content: | # Content of yum config. Tells it where to go and what to do when try to install the repo.
           [mongodb-org-3.6]
           name=MongoDB Repository
           baseurl=https://repo.mongodb.org/yum/amazon/2013.03/mongodb-org/3.6/x86_64/
@@ -78,4 +78,7 @@
           enabled=1
           gpgkey=https://www.mongodb.org/static/pgp/server-3.6.asc
 
-    # - name: Yum install mongo
+    - name: Yum install mongo
+      yum:
+        name: mongodb-org # What the package name is
+        state: latest # What version it should be installed as
