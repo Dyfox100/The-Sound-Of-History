@@ -5,12 +5,12 @@
 
 body {
   font-family: 'Playfair Display', serif;
-  text-align:center;
+  /* text-align:center;
   font-size:1.5em;
   margin-left:10%;
   margin-right:10%;
   margin-bottom:10%;
-  margin-top:10%;
+  margin-top:10%; */
 }
 
 #searchBox {
@@ -19,11 +19,20 @@ body {
 }
 
 .title {
+    text-align: center;
+    font-size: 3em;
+}
+
+ul {
+    list-style-type: none;
+}
+
+/* .title {
   display:block;
   margin-left:auto;
   margin-right:auto;
   width:80%;
-}
+} */
 
 p {
   font-size: 1em;
