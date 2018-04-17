@@ -4,7 +4,7 @@
 # ssh -i Boaty-test.pem ec2-user@((PUT EC2 IPV4 HERE))
 # is the ubuntu command to ssh into the EC2 instance
 --- # tell ansible that it's a yaml file
-- name: Example # name of file
+- name: Create the database on EC2 server # name of playbook
   hosts: local # Where it runs from
   gather_facts: no # don't gather environment variables
 
@@ -13,31 +13,31 @@
 
   tasks: # What it will do
 
-    - name: Create EC2 instance # Name of task
-      ec2:
-        key_name: Boaty-test # name of pem
-        instance_type: t2.micro # instance size
-        aws_access_key: "{{aws_access_key}}"
-        aws_secret_key: "{{aws_secret_key}}"
-        image: ami-d874e0a0 # What type of instance it will be
-        wait: yes # wait to do other tasks until finished
-        group: Test-wizard-16 # What security group it is under
-        exact_count: 1 # How many instances are active
-        count_tag: # What instances are being monitored
-          Name: Boaty_Test
-        instance_tags: # Tags to search for instance
-          "Name": "Boaty_Mongo_Test"
-          "Team Name": "Boat-y"
-        region: us-west-2 # Region that instance is created in
-      register: ec2_out # Output of instance variables
+    # - name: Create EC2 instance # Name of task
+    #   ec2:
+    #     key_name: Boaty-test # name of pem
+    #     instance_type: t2.micro # instance size
+    #     aws_access_key: "{{aws_access_key}}"
+    #     aws_secret_key: "{{aws_secret_key}}"
+    #     image: ami-d874e0a0 # What type of instance it will be
+    #     wait: yes # wait to do other tasks until finished
+    #     group: Test-wizard-16 # What security group it is under
+    #     exact_count: 1 # How many instances are active
+    #     count_tag: # What instances are being monitored
+    #       Name: Boaty_Test
+    #     instance_tags: # Tags to search for instance
+    #       "Name": "Boaty_Mongo_Test"
+    #       "Team Name": "Boat-y"
+    #     region: us-west-2 # Region that instance is created in
+    #   register: ec2_out # Output of instance variables
 
     # - debug:
     #     msg: "{{ec2_out}}" # this is how variables are used
 
     - name: Generate local_ip
       set_fact:
-        ec2_ip: "{{ec2_out['tagged_instances'][0]['public_ip']}}" # Gets the ip of the ec2 instance
-        # ec2_ip: 34.211.71.178
+        # ec2_ip: "{{ec2_out['tagged_instances'][0]['public_ip']}}" # Gets the ip of the ec2 instance
+        ec2_ip: 34.208.125.125
 
     - name: Add a host to the group to_be_provisioned
       add_host: # Add a host for who will perform actions
@@ -62,28 +62,34 @@
 
 - name: Setting up Mongo
   hosts: to_be_provisioned
-  sudo: yes
+  become: yes
 
   tasks:
 
-    - name: Configure yum to install mongo package at /etc/yum.repos.d/mongodb-org-3.6.repo # Create the yum config directory to designate how to install
+    # - name: Configure yum to install mongo package at /etc/yum.repos.d/mongodb-org-3.6.repo # Create the yum config directory to designate how to install
+    #   copy:
+    #     dest: /etc/yum.repos.d/mongodb-org-3.6.repo # Destination repo
+    #     force: no # Creates a new file if not there already.
+    #     content: | # Content of yum config. Tells it where to go and what to do when try to install the repo.
+    #       [mongodb-org-3.6]
+    #       name=MongoDB Repository
+    #       baseurl=https://repo.mongodb.org/yum/amazon/2013.03/mongodb-org/3.6/x86_64/
+    #       gpgcheck=1
+    #       enabled=1
+    #       gpgkey=https://www.mongodb.org/static/pgp/server-3.6.asc
+    #
+    # - name: Yum install mongo
+    #   yum:
+    #     name: mongodb-org # What the package name is
+    #     state: latest # What version it should be installed as
+    #
+    # - name: Start the mongod service
+    #   service:
+    #     name: mongod # name of service
+    #     state: started # start the service
+
+    - name: Copy the python scripts to scrape billboard to the ec2 server
       copy:
-        dest: /etc/yum.repos.d/mongodb-org-3.6.repo # Destination repo
-        force: no # Creates a new file if not there already.
-        content: | # Content of yum config. Tells it where to go and what to do when try to install the repo.
-          [mongodb-org-3.6]
-          name=MongoDB Repository
-          baseurl=https://repo.mongodb.org/yum/amazon/2013.03/mongodb-org/3.6/x86_64/
-          gpgcheck=1
-          enabled=1
-          gpgkey=https://www.mongodb.org/static/pgp/server-3.6.asc
-
-    - name: Yum install mongo
-      yum:
-        name: mongodb-org # What the package name is
-        state: latest # What version it should be installed as
-
-    - name: Start the mongod service
-      service:
-        name: mongod # name of service
-        state: started # start the service
+        src: /mnt/d/BigDataStuff/boat-y/Billboard Parsing and Migration Into Mongo (Python)/BillBoard_To_Mongo_Python_scripts # /D:/BigDataStuff/boat-y/Billboard Parsing and Migration Into Mongo (Python)/BillBoard_To_Mongo_Python_scripts
+        dest: /home/ec2-user
+      become: yes
