@@ -102,4 +102,5 @@
       pip:
         name: pymongo
 
-    #- name: run python script to populate database
+    - name: run python script to populate database
+      command: python BillBoard_To_Mongo_Python_scripts/Billboard_Parsing_Main.py
