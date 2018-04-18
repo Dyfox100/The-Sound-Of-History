@@ -1,5 +1,4 @@
 # ansible-playbook -i hosts example.yaml
-# This is a file to begin an EC2 instance
 # cd /mnt
 # ssh -i Boaty-test.pem ec2-user@((PUT EC2 IPV4 HERE))
 # is the ubuntu command to ssh into the EC2 instance
@@ -14,7 +13,7 @@
   tasks: # What it will do
 
     - name: Create EC2 instance # Name of task
-      ec2:
+      ec2: # What command is being executed
         key_name: Boaty-test # name of pem
         instance_type: t2.micro # instance size
         aws_access_key: "{{aws_access_key}}"
@@ -35,7 +34,7 @@
     #     msg: "{{ec2_out}}" # this is how variables are used
 
     - name: Generate local_ip
-      set_fact:
+      set_fact: # Sets a variable
         ec2_ip: "{{ec2_out['tagged_instances'][0]['public_ip']}}" # Gets the ip of the ec2 instance
         # ec2_ip: 34.210.191.127
 
@@ -61,8 +60,8 @@
       delegate_to: "{{ec2_ip}}" # What host is performing this action
 
 - name: Setting up Mongo
-  hosts: to_be_provisioned
-  become: yes
+  hosts: to_be_provisioned # Performs actions on the EC2 instance, not locally.
+  become: yes # use sudo
 
   tasks:
 
@@ -89,16 +88,16 @@
         state: started # start the service
 
     - name: Copy the python scripts to scrape billboard to the ec2 server
-      copy:
-        src: /mnt/d/BigDataStuff/boat-y/Billboard Parsing and Migration Into Mongo (Python)/BillBoard_To_Mongo_Python_scripts
-        dest: /home/ec2-user
-      become: yes
+      copy: # copies from local machine to EC2 instance
+        src: /mnt/d/BigDataStuff/boat-y/Billboard Parsing and Migration Into Mongo (Python)/BillBoard_To_Mongo_Python_scripts # local source file. Need to update to only be in git repo.
+        dest: /home/ec2-user # Destination file on EC2
+      become: yes # I had to put this here again
 
-    - name: pip install billboard.py
+    - name: pip install billboard.py # Installing needed python modules
       pip:
         name: billboard.py
 
-    - name: pip install pymongo
+    - name: pip install pymongo # More modules
       pip:
         name: pymongo
 
