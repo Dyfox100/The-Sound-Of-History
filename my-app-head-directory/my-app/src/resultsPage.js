@@ -10,6 +10,10 @@ import { InputGroup, InputGroupAddon, Button, Input, NavLink } from 'reactstrap'
 export class ResultsPage extends React.Component {
     queriedItems: "";
     state: {"test":"qqq"};
+    constructor(props){
+        super(props);
+        this.state = {"data":[]};
+    }
     componentDidMount = () => {
       this.info = this.getInfo();
     }
@@ -20,7 +24,7 @@ export class ResultsPage extends React.Component {
         'Content-Type': 'application/json',
         'Accept': 'application/json'
       }
-    }).then((res) => console.log(res.json()));
+  }).then((res) => res.json()).then(data => this.setState({"data": data.ASDFAF}));
     }
     render(){
         const history = ['1', '2','3','4','5','6','7','8','9','10'];
@@ -45,7 +49,7 @@ export class ResultsPage extends React.Component {
                   <br/>
                   <SongBox songs = {songs}/>
               </div>
-              <p>{this.state}</p>
+              <p>{this.state.data}</p>
           </div>
         );
     }
