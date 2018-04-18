@@ -9,6 +9,19 @@ import { InputGroup, InputGroupAddon, Button, Input, NavLink } from 'reactstrap'
 
 export class ResultsPage extends React.Component {
     queriedItems: "";
+    state: {"test":"qqq"};
+    componentDidMount = () => {
+      this.info = this.getInfo();
+    }
+
+    getInfo = () => {
+      fetch("result", {
+        headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
+      }
+    }).then((res) => console.log(res.json()));
+    }
     render(){
         const history = ['1', '2','3','4','5','6','7','8','9','10'];
         const songs = {
@@ -32,6 +45,7 @@ export class ResultsPage extends React.Component {
                   <br/>
                   <SongBox songs = {songs}/>
               </div>
+              <p>{this.state}</p>
           </div>
         );
     }

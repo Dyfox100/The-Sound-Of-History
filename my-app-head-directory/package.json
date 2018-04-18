@@ -1,0 +1,15 @@
+{
+  "name": "my-app-head-directory",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "dependencies": {
+    "express": "^4.15.3",
+    "password-generator": "^2.1.0"
+  },
+  "scripts": {
+    "start": "node app.js && cd my-app && npm run build"
+  },
+  "author": "",
+  "license": "ISC"
+}

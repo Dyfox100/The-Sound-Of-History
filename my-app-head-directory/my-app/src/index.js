@@ -5,14 +5,18 @@ import WebFont from 'webfontloader';
 import 'bootstrap/dist/css/bootstrap.css';
 import { InputGroup, InputGroupAddon, Button, Input, NavLink } from 'reactstrap';
 
-import {ResultsPage, HistoryBox, SongBox} from "./resultsPage.js"
+//import logo from './img/soundOfMusic.png'
+//import {SearchPage, SearchBar, DescriptionBox} from "./components/searchPage";
+import { ResultsPage, HistoryBox} from './resultsPage';
+
 import './index.css';
 
 class Home extends React.Component {
   render(){
     return (
       <div>
-        <ResultsPage/>
+        <br/>
+        <ResultsPage />
       </div>
     );
   }
@@ -24,7 +28,4 @@ WebFont.load({
   }
 });
 
-ReactDOM.render(
-   <Home />,
-   document.getElementById('root')
-);
+ReactDOM.render(<Home />, document.getElementById('root'));
