@@ -5,7 +5,9 @@
   "main": "app.js",
   "dependencies": {
     "express": "^4.15.3",
-    "password-generator": "^2.1.0"
+    "nodemon": "^1.17.3",
+    "password-generator": "^2.1.0",
+    "request": "^2.85.0"
   },
   "scripts": {
     "start": "node app.js && cd my-app && npm run build"

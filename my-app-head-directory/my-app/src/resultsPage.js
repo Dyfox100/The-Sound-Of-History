@@ -24,7 +24,7 @@ export class ResultsPage extends React.Component {
         'Content-Type': 'application/json',
         'Accept': 'application/json'
       }
-  }).then((res) => res.json()).then(data => this.setState({"data": data.ASDFAF}));
+  }).then((res) => res.json()).then(data => {console.log(data), this.setState({"data": data[1].headline.main})});
     }
     render(){
         const history = ['1', '2','3','4','5','6','7','8','9','10'];
@@ -179,9 +179,10 @@ export class HistoryBox extends React.Component {
 
     }
 }
-
+/*
 WebFont.load({
     google: {
         families: ['Playfair Display', 'serif']
     }
-});
+    console.log("Executed Correctly");
+});*/
