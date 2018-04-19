@@ -122,3 +122,8 @@
         path: /etc/sysconfig/elasticsearch
         regexp: '#ES_HEAP_SIZE=2g'
         replace: '#ES_HEAP_SIZE=0.5g'
+
+    - name: Start ElasticSearch Service
+      service:
+        name: elasticsearch
+        state: started
