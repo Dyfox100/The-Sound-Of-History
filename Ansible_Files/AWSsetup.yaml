@@ -59,7 +59,7 @@
     #     state: touch # What the instance is doing
     #   delegate_to: "{{ec2_ip}}" # What host is performing this action
 
-- name: Setting up Mongo
+- name: Setup Mongo and ElasticSearch
   hosts: to_be_provisioned # Performs actions on the EC2 instance, not locally.
   become: yes # use sudo
 
@@ -103,3 +103,22 @@
 
     - name: run python script to populate database
       command: python BillBoard_To_Mongo_Python_scripts/Billboard_Parsing_Main.py
+
+    - name: install elasticSearch RPM package
+      yum:
+        name: https://download.elastic.co/elasticsearch/release/org/elasticsearch/distribution/rpm/elasticsearch/2.3.3/elasticsearch-2.3.3.rpm
+        state: present
+
+    - name: Register ElasticSearch as a system service
+      command: chkconfig --add elasticsearch
+
+    - name: Install AWS Cloud plugin
+      command: bin/plugin install cloud-aws
+      args:
+        chdir: /usr/share/elasticsearch/
+
+    - name: Set ES_Heap_Size
+      replace:
+        path: /etc/sysconfig/elasticsearch
+        regexp: '#ES_HEAP_SIZE=2g'
+        replace: '#ES_HEAP_SIZE=0.5g'
