@@ -8,8 +8,7 @@ import { InputGroup, InputGroupAddon, Button, Input, NavLink } from 'reactstrap'
 // import './index.css';
 
 export class ResultsPage extends React.Component {
-    queriedItems: "";
-    state: {"test":"qqq"};
+
     constructor(props){
         super(props);
         this.state = {"data":[]};
@@ -24,7 +23,8 @@ export class ResultsPage extends React.Component {
         'Content-Type': 'application/json',
         'Accept': 'application/json'
       }
-  }).then((res) => res.json()).then(data => {console.log(data), this.setState({"data": data[1].headline.main})});
+  }).then((res) => res.json())
+  .then(headlineArray => {this.setState({"headlines": headlineArray})});
     }
     render(){
         const history = ['1', '2','3','4','5','6','7','8','9','10'];
