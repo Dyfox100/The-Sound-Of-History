@@ -11,20 +11,20 @@ export class ResultsPage extends React.Component {
 
     constructor(props){
         super(props);
-        this.state = {"data":[]};
+        this.state = {"headlines":[]};
     }
     componentDidMount = () => {
       this.info = this.getInfo();
     }
 
     getInfo = () => {
-      fetch("result", {
+      fetch("/result", {
         headers: {
         'Content-Type': 'application/json',
         'Accept': 'application/json'
       }
   }).then((res) => res.json())
-  .then(headlineArray => {this.setState({"headlines": headlineArray})});
+  .then(headlineArray => {this.setState({"headlines": headlineArray[1].headline.main})});
     }
     render(){
         const history = ['1', '2','3','4','5','6','7','8','9','10'];
@@ -49,7 +49,7 @@ export class ResultsPage extends React.Component {
                   <br/>
                   <SongBox songs = {songs}/>
               </div>
-              <p>{this.state.data}</p>
+              <p>{this.state.headlines}</p>
           </div>
         );
     }
