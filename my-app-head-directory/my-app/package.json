@@ -2,12 +2,16 @@
   "name": "my-app",
   "version": "0.1.0",
   "private": true,
+  "proxy": "http://localhost:4001/",
   "dependencies": {
-    "bootstrap": "^4.0.0",
-    "react": "^16.2.0",
-    "react-dom": "^16.2.0",
-    "react-scripts": "^1.1.1",
-    "reactstrap": "^5.0.0-beta.3",
+    "ajv": "^6.4.0",
+    "bootstrap": "^4.1.0",
+    "jQuery": "^1.7.4",
+    "jquery": "^3.3.1",
+    "react": "^16.3.1",
+    "react-dom": "^16.3.1",
+    "react-scripts": "^1.1.4",
+    "reactstrap": "^5.0.0",
     "webfontloader": "^1.6.28"
   },
   "scripts": {
@@ -17,3 +21,6 @@
     "eject": "react-scripts eject"
   }
 }
+
+
+"http://localhost:4001/results"

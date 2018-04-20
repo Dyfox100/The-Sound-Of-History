@@ -3,14 +3,29 @@ import ReactDOM from 'react-dom';
 import WebFont from 'webfontloader';
 
 import 'bootstrap/dist/css/bootstrap.css';
-import { InputGroup, InputGroupAddon, Button, Input, NavLink, Container, Row, Col, Navbar, Nav, NavItem } from 'reactstrap';
+import { InputGroup, InputGroupAddon, Button, Input, NavLink } from 'reactstrap';
 
-import { NavBar } from "./resultsPage.js"
-import './index.css';
-
+// import './index.css';
 
 export class ResultsPage extends React.Component {
-    queriedItems: "";
+
+    constructor(props){
+        super(props);
+        this.state = {"data":[]};
+    }
+    componentDidMount = () => {
+      this.info = this.getInfo();
+    }
+
+    getInfo = () => {
+      fetch("result", {
+        headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
+      }
+  }).then((res) => res.json())
+  .then(headlineArray => {this.setState({"headlines": headlineArray})});
+    }
     render(){
         const history = ['1', '2','3','4','5','6','7','8','9','10'];
         const songs = {
@@ -27,21 +42,15 @@ export class ResultsPage extends React.Component {
         };
         const date = "2017-04-30";
         return (
-            <div>
-                <DateBox date={date}/>
-                <div>
-                    <Row>
-                        <Col xs="6">
-                            <HistoryBox history = {history}/>
-                        </Col>
-                        <Col xs="6">
-                        <div className="scrollbar-ripe-malinka">
-                        <SongBox songs={songs}/>
-                        </div>
-                        </Col>
-                    </Row>
-                </div>
-            </div>
+          <div>
+              <DateBox date= {date}/>
+              <div>
+                  <HistoryBox history = {history}/>
+                  <br/>
+                  <SongBox songs = {songs}/>
+              </div>
+              <p>{this.state.data}</p>
+          </div>
         );
     }
     displays(){
@@ -56,7 +65,8 @@ export class DateBox extends React.Component {
       this.parseDates = this.parseDates.bind(this);
     }
     parseDates() {
-        let months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+        let months = ['January', 'February', 'March', 'April', 'May', 'June',
+        'July', 'August', 'September', 'October', 'November', 'December'];
 
         let year = this.date.slice(0, 4);
         let day = this.date.slice(8, 10);
@@ -68,7 +78,7 @@ export class DateBox extends React.Component {
     render(){
         return (
           <div>
-              <h1 className="title">The Sound of {this.parseDates()}</h1>
+              <h1>The Sound of {this.parseDates()}</h1>
           </div>
         );
     }
@@ -118,7 +128,7 @@ export class SongBox extends React.Component {
     render(){
         return (
           <div>
-            <h2>Songs</h2>
+            <h1>Songs</h1>
                 <div>
                     <ol>
                         {
@@ -148,9 +158,9 @@ export class HistoryBox extends React.Component {
     render(){
         return (
             <div>
-                <h2>
+                <h1>
                     {this.history[0]}
-                </h2>
+                </h1>
                 <ul>{
                     this.history.slice(1,10).map((item) => {
                         return<li> {item}</li>
@@ -169,9 +179,10 @@ export class HistoryBox extends React.Component {
 
     }
 }
-
+/*
 WebFont.load({
     google: {
         families: ['Playfair Display', 'serif']
     }
-});
+    console.log("Executed Correctly");
+});*/
