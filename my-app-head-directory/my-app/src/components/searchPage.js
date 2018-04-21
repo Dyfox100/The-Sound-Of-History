@@ -4,6 +4,7 @@ import ReactDOM from 'react-dom';
 
 import WebFont from 'webfontloader';
 import { InputGroup, InputGroupAddon, Button, Input, NavLink } from 'reactstrap';
+import { Redirect } from "react-router-dom";
 
 // import css files
 import '../index.css';
@@ -43,7 +44,8 @@ export class SearchBar extends React.Component {
     constructor(props){
         super(props);
         this.state = {
-            value: ''
+            value: '',
+            ready: false
         };
         this.updateSearch = this.updateSearch.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
@@ -56,6 +58,7 @@ export class SearchBar extends React.Component {
     handleSubmit(event){
         alert('This is what was searched: ' + this.state.value);
         event.preventDefault();
+        this.setState({ready: true})
     }
 
     render(){
@@ -73,7 +76,10 @@ export class SearchBar extends React.Component {
                 </InputGroupAddon>
             </InputGroup>
             <br/>
-            {this.state.text}
+            {this.state.ready && ( <Redirect to={{
+                pathname: "/ResultsPage",
+                state: this.state.value
+            }}  />)}
           </div>
         );
     }

@@ -54,6 +54,7 @@ export class ResultsPage extends React.Component {
                   <SongBox songs = {songs}/>
               </div>
               <p>{this.state.headlines}</p>
+              <p>{this.props.location.state}</p>
           </div>
         );
     }
