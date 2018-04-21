@@ -4,6 +4,11 @@ import WebFont from 'webfontloader';
 
 import 'bootstrap/dist/css/bootstrap.css';
 import { InputGroup, InputGroupAddon, Button, Input, NavLink, Container, Row, Col, Navbar, Nav, NavItem } from 'reactstrap';
+import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+
+import { SearchPage } from './components/searchPage.js'
+import { EventSuggest } from './eventSuggestPage.js'
+
 
 // class Title extends React.Component {
 //    var titleName = "";
@@ -57,31 +62,20 @@ import { InputGroup, InputGroupAddon, Button, Input, NavLink, Container, Row, Co
 // }
 
 export class NavBar extends React.Component {
-    // var stateName = "";
-
     render(){
         return (
             <div>
                 <Navbar color="light" light expand="md">
                     <Nav className="ml-auto">
                         <NavItem>
-                            <NavLink href="https://www.google.com/">Search</NavLink>
+                            <Link to={'/'} >Search</Link>
                         </NavItem>
                         <NavItem>
-                            <NavLink href="https://www.instagram.com/">Event Suggestions</NavLink>
+                            <Link to={'EventSuggest'}>Event Suggestions</Link>
                         </NavItem>
                     </Nav>
                 </Navbar>
             </div>
         );
     }
-   // redirect(){
-   //
-   // }
-   // getStateName(){
-   //
-   // }
-   // setStateName(){
-   //
-   // }
 }

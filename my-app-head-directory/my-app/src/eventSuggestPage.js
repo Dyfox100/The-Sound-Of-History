@@ -9,41 +9,40 @@ import { InputGroup, InputGroupAddon, Button, Input, NavLink } from 'reactstrap'
 import './index.css';
 
 // ----- INTERFACE -----
-class EventSuggest extends React.Component {
-   render(){
-      return (
-
-      );
-   }
-   listYearBoxes(){
-
-   }
+export class EventSuggest extends React.Component {
+    render(){
+        return (
+            <h1>Event Suggestions</h1>
+        );
+    }
+   //  listYearBoxes(){
+   // }
 }
 // ----- END OF INTERFACE -----
 
-class YearBox extends React.Component {
-   var yearName = "";
-
-   render(){
-      return (
-
-      );
-   }
-   setYearName(){
-
-   }
-   yearEvents(){
-
-   }
-}
-
-WebFont.load({
-    google: {
-        families: ['Playfair Display', 'serif']
-    }
-});
-
-ReactDOM.render(
-   <EventSuggest />,
-   document.getElementById('root')
-);
+// class YearBox extends React.Component {
+//    var yearName = "";
+//
+//    render(){
+//       return (
+//
+//       );
+//    }
+//    setYearName(){
+//
+//    }
+//    yearEvents(){
+//
+//    }
+// }
+//
+// WebFont.load({
+//     google: {
+//         families: ['Playfair Display', 'serif']
+//     }
+// });
+//
+// ReactDOM.render(
+//    <EventSuggest />,
+//    document.getElementById('root')
+// );
