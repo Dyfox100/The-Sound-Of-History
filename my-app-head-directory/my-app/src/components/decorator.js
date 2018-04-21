@@ -1,14 +1,19 @@
+// ----- IMPORTS -----
 import React from 'react';
 import ReactDOM from 'react-dom';
-import WebFont from 'webfontloader';
 
-import 'bootstrap/dist/css/bootstrap.css';
+import WebFont from 'webfontloader';
 import { InputGroup, InputGroupAddon, Button, Input, NavLink, Container, Row, Col, Navbar, Nav, NavItem } from 'reactstrap';
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 
-import { SearchPage } from './components/searchPage.js'
+// import components
+import { SearchPage } from './searchPage.js'
 import { EventSuggest } from './eventSuggestPage.js'
 
+// import css files
+import 'bootstrap/dist/css/bootstrap.css';
+
+// ----- END OF IMPORTS -----
 
 // class Title extends React.Component {
 //    var titleName = "";

@@ -1,12 +1,16 @@
+// ----- IMPORTS -----
 import React from 'react';
 import ReactDOM from 'react-dom';
-import WebFont from 'webfontloader';
 
-import 'bootstrap/dist/css/bootstrap.css';
+import WebFont from 'webfontloader';
 import { InputGroup, InputGroupAddon, Button, Input, NavLink } from 'reactstrap';
 
-// import './index.css';
+// import css files
+import '../index.css';
+import 'bootstrap/dist/css/bootstrap.css';
+// ----- END OF IMPORTS -----
 
+// ----- INTERFACE -----
 export class ResultsPage extends React.Component {
 
     constructor(props){
@@ -57,6 +61,7 @@ export class ResultsPage extends React.Component {
 
     }
 }
+// ----- END OF INTERFACE -----
 
 export class DateBox extends React.Component {
     constructor(props) {

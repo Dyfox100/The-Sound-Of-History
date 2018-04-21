@@ -1,11 +1,16 @@
+// ----- IMPORTS -----
 import React from 'react';
 import ReactDOM from 'react-dom';
-import WebFont from 'webfontloader';
 
-import 'bootstrap/dist/css/bootstrap.css';
+import WebFont from 'webfontloader';
 import { InputGroup, InputGroupAddon, Button, Input, NavLink } from 'reactstrap';
 
+// import css files
+import '../index.css';
+import 'bootstrap/dist/css/bootstrap.css';
+// ----- END OF IMPORTS -----
 
+// ----- INTERFACE -----
 export class SearchPage extends React.Component {
     render(){
       return (
@@ -17,6 +22,7 @@ export class SearchPage extends React.Component {
       );
     }
 }
+// ----- END OF INTERFACE -----
 
 export class DescriptionBox extends React.Component {
     constructor(props){
