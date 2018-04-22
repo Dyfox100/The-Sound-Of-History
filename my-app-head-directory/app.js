@@ -6,9 +6,31 @@ var app = express();
 //app.use(express.static(__dirname + 'my-app/src'));
 
 app.get('/result/:query', (req, res) => {
-    const url = "https://api.nytimes.com/svc/search/v2/articlesearch.json?api-key=5a1867eea1154ea0a495d421ea1263a4&begin_date=20000110&end_date=20010113";
     var info = {"update": "this didn´t update"};
-    console.log(req.params.query);
+    const input = req.params.query;
+    //check type of input
+    if (input[2] === input[5] && (input[2] === '/' || input[2] === '-')){
+        console.log('success!!!');
+        const url = "https://api.nytimes.com/svc/search/v2/articlesearch.json?api-key=5a1867eea1154ea0a495d421ea1263a4&begin_date=20000110&end_date=20010113";
+        const dateInput = input.slice(0,2) + input.slice(3,5) + input.slice(6);
+        console.log(dateInput);
+        // const propertiesObject = { begin_date:}
+        request.get(url, (error, response, body) => {
+            if (error) {
+                console.log(error);
+            }
+            else {
+
+                let jsonRes = JSON.parse(body);
+                //console.log(jsonRes);
+                info = jsonRes.response.docs;
+                res.send(info);
+            }
+        });
+    } else {
+        console.log('this is not a date. try again.');
+    }
+    console.log(input);
     request.get(url, (error, response, body) => {
         if (error) {
             console.log(error);
