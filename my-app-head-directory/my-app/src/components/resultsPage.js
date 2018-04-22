@@ -22,13 +22,13 @@ export class ResultsPage extends React.Component {
     }
 
     getInfo = () => {
-      fetch("/result", {
+      fetch("/result/" + this.props.location.state, {
         headers: {
         'Content-Type': 'application/json',
         'Accept': 'application/json'
       }
   }).then((res) => res.json())
-  .then(headlineArray => {this.setState({"headlines": headlineArray[1].headline.main})});
+  //.then(headlineArray => {this.setState({"headlines": headlineArray[1].headline.main})});
     }
     render(){
         const history = ['1', '2','3','4','5','6','7','8','9','10'];
