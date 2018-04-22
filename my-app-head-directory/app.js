@@ -10,11 +10,12 @@ app.get('/result/:query', (req, res) => {
     const input = req.params.query;
     //check type of input
     if (input[2] === input[5] && (input[2] === '/' || input[2] === '-')){
-        console.log('success!!!');
-        const url = "https://api.nytimes.com/svc/search/v2/articlesearch.json?api-key=5a1867eea1154ea0a495d421ea1263a4&begin_date=20000110&end_date=20010113";
-        const dateInput = input.slice(0,2) + input.slice(3,5) + input.slice(6);
-        console.log(dateInput);
-        // const propertiesObject = { begin_date:}
+        //console.log('success!!!');
+        //const url = "https://api.nytimes.com/svc/search/v2/articlesearch.json?api-key=5a1867eea1154ea0a495d421ea1263a4&begin_date=20000110&end_date=20010113";
+        var url = "https://api.nytimes.com/svc/search/v2/articlesearch.json?api-key=5a1867eea1154ea0a495d421ea1263a4";
+        const dateInput =   input.slice(6)  + input.slice(0,2) + input.slice(3,5);
+        url = url + "&begin_date=" + dateInput + "&end_date=" + dateInput;
+        //const queryObject = {begin_date: dateInput, end_date: dateInput};
         request.get(url, (error, response, body) => {
             if (error) {
                 console.log(error);
@@ -22,7 +23,7 @@ app.get('/result/:query', (req, res) => {
             else {
 
                 let jsonRes = JSON.parse(body);
-                //console.log(jsonRes);
+
                 info = jsonRes.response.docs;
                 res.send(info);
             }
@@ -30,19 +31,19 @@ app.get('/result/:query', (req, res) => {
     } else {
         console.log('this is not a date. try again.');
     }
-    console.log(input);
-    request.get(url, (error, response, body) => {
-        if (error) {
-            console.log(error);
-        }
-        else {
-
-            let jsonRes = JSON.parse(body);
-            //console.log(jsonRes);
-            info = jsonRes.response.docs;
-            res.send(info);
-        }
-    });
+    // console.log(input);
+    // request.get(url, (error, response, body) => {
+    //     if (error) {
+    //         console.log(error);
+    //     }
+    //     else {
+    //
+    //         let jsonRes = JSON.parse(body);
+    //         //console.log(jsonRes);
+    //         info = jsonRes.response.docs;
+    //         res.send(info);
+    //     }
+    // });
 });
 
 app.listen(process.env.port || 4001, () => {
