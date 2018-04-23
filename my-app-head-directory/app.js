@@ -1,7 +1,23 @@
 var express = require('express');
 var path = require('path');
-const request = require("request");
+var mongodb = require('mongodb');
+var request = require("request");
 var app = express();
+
+var mongoClient = mongodb.MongoClient;
+
+mongoClient.connect('mongodb://localhost:27017', (err, client) => {
+    if (err) {
+        throw err;
+    } else {
+        var db = client.db("top_100_weekly");
+        console.log("Connected to Mongo");
+        var collection = db.collection("songs");
+        collection.count(function(err, count) {
+            console.log(count);
+        });
+    }
+});
 
 //app.use(express.static(__dirname + 'my-app/src'));
 
