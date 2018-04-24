@@ -5,22 +5,50 @@ var request = require("request");
 var app = express();
 
 var mongoClient = mongodb.MongoClient;
+var client;
 
-mongoClient.connect('mongodb://localhost:27017', (err, client) => {
+mongoClient.connect('mongodb://localhost:27017', (err, client1) => {
     if (err) {
         throw err;
     } else {
-        var db = client.db("top_100_weekly");
-        console.log("Connected to Mongo");
-        var collection = db.collection("songs");
-        collection.count(function(err, count) {
-            console.log(count);
-        });
+        client = client1;
     }
 });
 
-//app.use(express.static(__dirname + 'my-app/src'));
+app.get('/songtest', (req, res) => {
+    var db = client.db("top_100_weekly");
+    //console.log("Connected to Mongo");
+    var collection = db.collection("songs");
+    //console.log(count);
+    let date = "2018-03-17";
+    collection.findOne({endDate: date}, (err, result) => {
+        var arraySongs = new Array(15);
+        for (var index = 0; index < 15; index++) {
+            arraySongs[index] = {};
+        }
+        //console.log(arraySongs);
+        //console.log(result);
+        //this is for a date input search by user, hence no date or id accepted
+        for (var key in result) {
+            if (key != "_id" && key != "beginDate" && key != "endDate") {
+                let lastChar = key.slice(-2)
 
+                if (lastChar[0] == "_") {
+                    arraySongs[Number(lastChar[1]) - 1][key.slice(0, -2)] = result[key];
+                    //console.log(result[key]);
+                } else {
+                    arraySongs[Number(lastChar) - 1][key.slice(0, -3)] = result[key];
+                //console.log(result[key]);
+                }
+            }
+        }
+        res.send(arraySongs);
+    });
+});
+
+
+
+//app.use(express.static(__dirname + 'my-app/src'));
 app.get('/result/:query', (req, res) => {
     var info = {"update": "this didn´t update"};
     const input = req.params.query;
