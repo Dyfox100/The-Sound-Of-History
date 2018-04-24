@@ -15,7 +15,7 @@ export class ResultsPage extends React.Component {
 
     constructor(props){
         super(props);
-        this.state = {"headlines":[]};
+        this.state = {date: this.props.location.state};
     }
     componentDidMount = () => {
       this.info = this.getInfo();
@@ -28,10 +28,9 @@ export class ResultsPage extends React.Component {
         'Accept': 'application/json'
       }
   }).then((res) => res.json())
-  //.then(headlineArray => {this.setState({"headlines": headlineArray[1].headline.main})});
+  .then(headlineArray => {this.setState({"headlines": headlineArray})});
     }
     render(){
-        const history = ['1', '2','3','4','5','6','7','8','9','10'];
         const songs = {
            song1: "This is a test song",
            artist1: "This is an artist",
@@ -44,16 +43,15 @@ export class ResultsPage extends React.Component {
            lastWeek2: "This is last week 2",
            weeksOnChart2: "This is weeks 2"
         };
-        const date = "2017-04-30";
         return (
           <div>
-              <DateBox date= {date}/>
+              <DateBox date= {this.state.date}/>
               <div>
-                  <HistoryBox history = {history}/>
-                  <br/>
-                  <SongBox songs = {songs}/>
+                {this.state.headlines &&  <HistoryBox history = {this.state.headlines}/>}
+                <br/>
+                <SongBox songs = {songs}/>
               </div>
-              <p>{this.state.headlines}</p>
+
               <p>{this.props.location.state}</p>
           </div>
         );
@@ -74,9 +72,9 @@ export class DateBox extends React.Component {
         let months = ['January', 'February', 'March', 'April', 'May', 'June',
         'July', 'August', 'September', 'October', 'November', 'December'];
 
-        let year = this.date.slice(0, 4);
-        let day = this.date.slice(8, 10);
-        let month = months[Number(this.date.slice(5, 7)) -1];
+        let year = this.date.slice(6);
+        let day = this.date.slice(3, 5);
+        let month = months[Number(this.date.slice(0, 2)) -1];
 
         return month + " " + day + ", " + year;
     }
@@ -159,17 +157,17 @@ export class HistoryBox extends React.Component {
     constructor(props){
         super(props);
         this.history = this.props.history;
+        console.log(this.history);
     }
 
     render(){
         return (
             <div>
-                <h1>
-                    {this.history[0]}
-                </h1>
+            <h1>Events</h1>
                 <ul>{
-                    this.history.slice(1,10).map((item) => {
-                        return<li> {item}</li>
+                    this.history.map((item) => {
+                        console.log(item.headline);
+                        return<li> {item.headline.main}</li>
                     })
                 }
                 </ul>
