@@ -22,34 +22,30 @@ export class ResultsPage extends React.Component {
     }
 
     getInfo = () => {
-      fetch("/result/" + this.props.location.state, {
-        headers: {
-        'Content-Type': 'application/json',
-        'Accept': 'application/json'
-      }
-  }).then((res) => res.json())
-  .then(headlineArray => {this.setState({"headlines": headlineArray})});
+    //suffix of /result is date
+        fetch("/result/" + this.props.location.state,{
+            headers:
+            {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json'
+            }
+        }).then((res) => res.json()).then(headlinesAndSongs => {
+            this.setState(
+            {
+              "headlines": headlinesAndSongs.headlines,
+              "songs":headlinesAndSongs.songs
+            });
+            console.log(this.state.songs);
+        });
     }
     render(){
-        const songs = {
-           song1: "This is a test song",
-           artist1: "This is an artist",
-           peakPosition1: "This is a peak position",
-           lastWeek1: "This is last week",
-           weeksOnChart1: "This is weeks",
-           song2: "This is a test song 2",
-           artist2: "This is an artist 2",
-           peakPosition2: "This is a peak position 2",
-           lastWeek2: "This is last week 2",
-           weeksOnChart2: "This is weeks 2"
-        };
         return (
           <div>
               <DateBox date= {this.state.date}/>
               <div>
                 {this.state.headlines &&  <HistoryBox history = {this.state.headlines}/>}
                 <br/>
-                <SongBox songs = {songs}/>
+                <SongBox songs = {this.state.songs}/>
               </div>
 
               <p>{this.props.location.state}</p>
@@ -136,9 +132,12 @@ export class SongBox extends React.Component {
                 <div>
                     <ol>
                         {
-                            this.parseSongs().map((songObject) => {
-                                return <li>{songObject.song}</li>
-                        })
+                            this.songs.map((songInfo) => {
+                                return <li>{songInfo.artist}</li>
+                            })
+                            //this.parseSongs().map((songObject) => {
+                                //return <li>{songObject.song}</li>
+                        //})
                       }
                   </ol>
                 </div>
@@ -165,9 +164,9 @@ export class HistoryBox extends React.Component {
             <div>
             <h1>Events</h1>
                 <ul>{
-                    this.history.map((item) => {
-                        console.log(item.headline);
-                        return<li> {item.headline.main}</li>
+                        this.history.map((item) => {
+                        console.log(item);
+                        return<li> {item}</li>
                     })
                 }
                 </ul>
