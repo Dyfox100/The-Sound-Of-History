@@ -7,11 +7,12 @@ var app = express();
 var mongoClient = mongodb.MongoClient;
 var client;
 
-mongoClient.connect('mongodb://localhost:27017', (err, client1) => {
+mongoClient.connect('mongodb://52.40.13.91:27017', (err, client1) => {
     if (err) {
         throw err;
     } else {
         client = client1;
+        console.log("Successfully Connected");
     }
 });
 

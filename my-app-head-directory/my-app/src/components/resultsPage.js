@@ -15,15 +15,37 @@ export class ResultsPage extends React.Component {
 
     constructor(props){
         super(props);
-        this.state = {date: this.props.location.state};
+        var date = this.props.location.state;
+        switch(date.length) {
+            case 10:
+                if (date[2] === "/") {
+                    date = date.slice(0, 2) + "-" + date.slice(3, 5) + "-" + date.slice(6);
+                }
+                break;
+            case 8:
+                date = "0" + date.slice(0,1) + "-0" + date.slice(2, 3) + "-" + date.slice(4);
+                break;
+            case 9:
+                if (date[1] === "-" || date[1] === "/") {
+                    date = "0" + date.slice(0,1) + "-" + date.slice(2, 4) + "-" + date.slice(5);
+                }
+                else if (date[4] === "-" || date[4] === "/"){
+                    date = date.slice(0, 2) + "-0" + date.slice(3, 4) + "-" + date.slice(5);
+                }
+                break;
+        }
+        console.log(date);
+        this.state = {date: date};
+        this.getInfo = this.getInfo.bind(this);
     }
+
     componentDidMount = () => {
-      this.info = this.getInfo();
+      this.getInfo();
     }
 
     getInfo = () => {
     //suffix of /result is date
-        fetch("/result/" + this.props.location.state,{
+        fetch("/result/" + this.state.date,{
             headers:
             {
                 'Content-Type': 'application/json',
@@ -35,7 +57,8 @@ export class ResultsPage extends React.Component {
               "headlines": headlinesAndSongs.headlines,
               "songs":headlinesAndSongs.songs
             });
-            console.log(this.state.songs);
+            // console.log("this");
+            //console.log(this.state.songs);
         });
     }
     render(){
@@ -43,12 +66,10 @@ export class ResultsPage extends React.Component {
           <div>
               <DateBox date= {this.state.date}/>
               <div>
-                {this.state.headlines &&  <HistoryBox history = {this.state.headlines}/>}
+                {this.state.songs && <SongBox songs = {this.state.songs}/>}
                 <br/>
-                <SongBox songs = {this.state.songs}/>
+                {this.state.headlines &&  <HistoryBox history = {this.state.headlines}/>}
               </div>
-
-              <p>{this.props.location.state}</p>
           </div>
         );
     }
@@ -94,6 +115,7 @@ export class SongBox extends React.Component {
     constructor(props){
         super(props);
         this.songs = this.props.songs;
+        //console.log(this.props.songs);
         this.parseSongs = this.parseSongs.bind(this);
     }
     parseSongs(){
@@ -128,16 +150,13 @@ export class SongBox extends React.Component {
     render(){
         return (
           <div>
-            <h1>Songs</h1>
+            <h1>Top 100 Billboard Chart</h1>
                 <div>
                     <ol>
-                        {
+                         {
                             this.songs.map((songInfo) => {
                                 return <li>{songInfo.artist}</li>
                             })
-                            //this.parseSongs().map((songObject) => {
-                                //return <li>{songObject.song}</li>
-                        //})
                       }
                   </ol>
                 </div>
@@ -162,10 +181,9 @@ export class HistoryBox extends React.Component {
     render(){
         return (
             <div>
-            <h1>Events</h1>
+            <h1>New York Times Headlines</h1>
                 <ul>{
                         this.history.map((item) => {
-                        console.log(item);
                         return<li> {item}</li>
                     })
                 }
@@ -185,7 +203,7 @@ export class HistoryBox extends React.Component {
 /*
 WebFont.load({
     google: {
-        families: ['Playfair Display', 'serif']
+        families: ['Playfair Display', 'serif'],
     }
-    console.log("Executed Correctly");
+
 });*/
