@@ -1,25 +1,39 @@
 var express = require('express');
 var path = require('path');
-var mongodb = require('mongodb');
+//var mongodb = require('mongodb');
 var request = require("request");
 var app = express();
-
-var mongoClient = mongodb.MongoClient;
-
-mongoClient.connect('mongodb://localhost:27017', (err, client) => {
-    if (err) {
-        throw err;
-    } else {
-        var db = client.db("top_100_weekly");
-        console.log("Connected to Mongo");
-        var collection = db.collection("songs");
-        collection.count(function(err, count) {
-            console.log(count);
-        });
-    }
+var elasticsearch = require('elasticsearch');
+var client = new elasticsearch.Client({
+    hosts: ['https://username:password@host:port']
 });
 
+// var mongoClient = mongodb.MongoClient;
+
+// mongoClient.connect('mongodb://localhost:27017', (err, client) => {
+//     if (err) {
+//         throw err;
+//     } else {
+//         var db = client.db("top_100_weekly");
+//         console.log("Connected to Mongo");
+//         var collection = db.collection("songs");
+//         collection.count(function(err, count) {
+//             console.log(count);
+//         });
+//     }
+// });
+
 //app.use(express.static(__dirname + 'my-app/src'));
+
+client.ping({
+    requestTimeout: 30000,
+}, function(error){
+    if (error) {
+        console.error("Cluster is down!");
+    } else {
+        console.log('Everything is okay')
+    }
+});
 
 app.get('/result/:query', (req, res) => {
     var info = {"update": "this didn´t update"};
