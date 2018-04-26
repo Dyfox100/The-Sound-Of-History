@@ -1,4 +1,4 @@
-# ansible-playbook -i hosts example.yaml
+# ansible-playbook -i hosts AWSsetup.yaml
 # cd /mnt
 # ssh -i Boaty-test.pem ec2-user@((PUT EC2 IPV4 HERE))
 # is the ubuntu command to ssh into the EC2 instance
@@ -25,7 +25,7 @@
         count_tag: # What instances are being monitored
           Name: Boaty_Test
         instance_tags: # Tags to search for instance
-          "Name": "Boaty_Mongo_Database"
+          "Name": "Boaty_Mongo_Checking"
           "Team Name": "Boat-y"
         region: us-west-2 # Region that instance is created in
       register: ec2_out # Output of instance variables
@@ -36,7 +36,7 @@
     - name: Generate local_ip
       set_fact: # Sets a variable
         ec2_ip: "{{ec2_out['tagged_instances'][0]['public_ip']}}" # Gets the ip of the ec2 instance
-        # ec2_ip: 18.236.127.151
+        # ec2_ip: 54.191.187.239
 
     - name: Add a host to the group to_be_provisioned
       add_host: # Add a host for who will perform actions
@@ -53,11 +53,11 @@
         state: started
         # delay: 10
 
-    # - name: Make a temp file # Canary to see if we are in the instance
-    #   file:
-    #     path: /home/ec2-user/test.txt # Where to make the file
-    #     state: touch # What the instance is doing
-    #   delegate_to: "{{ec2_ip}}" # What host is performing this action
+    - name: Make a temp file # Canary to see if we are in the instance
+      file:
+        path: /home/ec2-user/test.txt # Where to make the file
+        state: touch # What the instance is doing
+      delegate_to: "{{ec2_ip}}" # What host is performing this action
 
 - name: Setup Mongo and ElasticSearch
   hosts: to_be_provisioned # Performs actions on the EC2 instance, not locally.
@@ -82,16 +82,16 @@
         name: mongodb-org # What the package name is
         state: latest # What version it should be installed as
 
+    - name: Configure mongod.conf to change bindIp to 0.0.0.0
+      replace:
+        path: /etc/mongod.conf
+        regexp: 'bindIp: 127.0.0.1'
+        replace: 'bindIp: 0.0.0.0'
+
     - name: Start the mongod service
       service:
         name: mongod # name of service
         state: started # start the service
-
-    - name: Copy the python scripts to scrape billboard to the ec2 server
-      copy: # copies from local machine to EC2 instance
-        src: /mnt/d/BigDataStuff/boat-y/Billboard Parsing and Migration Into Mongo (Python)/BillBoard_To_Mongo_Python_scripts # local source file. Don't know how to only be in git repo.
-        dest: /home/ec2-user # Destination file on EC2
-      become: yes # I had to put this here again
 
     - name: pip install billboard.py # Installing needed python modules
       pip:
@@ -101,8 +101,17 @@
       pip:
         name: pymongo
 
-    - name: run python script to populate database
-      command: python BillBoard_To_Mongo_Python_scripts/Billboard_Parsing_Main.py
+    - name: Copy the python scripts to scrape billboard to the ec2 server
+      copy: # copies from local machine to EC2 instance
+        src: /mnt/d/BigDataStuff/boat-y/Billboard Parsing and Migration Into Mongo (Python)/BillBoard_To_Mongo_Python_scripts # local source file. Don't know how to only be in git repo.
+        dest: /home/ec2-user # Destination file on EC2
+      become: yes # I had to put this here again
+
+    # - name: run python script to populate database
+    #   command: python BillBoard_To_Mongo_Python_scripts/Billboard_Parsing_Main.py
+
+
+    #ELASTICSEARCH
 
     - name: install elasticSearch RPM package
       yum:
@@ -127,3 +136,78 @@
       service:
         name: elasticsearch
         state: started
+    # curl localhost:9200/_cluster/health?pretty to check if server is running
+
+    # MONGO-CONNECTOR
+
+
+    - name: Install Mongo-Connector
+      pip:
+        name: 'mongo-connector[elastic2-aws]'
+      # mongo-connector -m localhost:27017 -t localhost:9200 -d elastic2_doc_manager
+
+    - name: Create Directories for Replica Sets
+      file:
+        state: directory
+        dest: /home/ec2-user/rs1
+
+    - file:
+        state: directory
+        dest: /home/ec2-user/rs2
+
+    - file:
+        state: directory
+        dest: /home/ec2-user/rs3
+
+
+    - name: Create Mongo Replica Sets
+      shell: |
+        mongod --replSet bbtop100 --logpath "rs1/1.log" --dbpath rs1 --port 27018 &
+        mongod --replSet bbtop100 --logpath "rs2/2.log" --dbpath rs2 --port 27019 &
+        mongod --replSet bbtop100 --logpath "rs3/3.log" --dbpath rs3 --port 27020 &
+      # Use command rs.status(); within mongo to see if replica sets are active
+
+    - name: Copy Mongo Replica Init File to EC2
+      copy:
+        dest: /home/ec2-user
+        src: /mnt/d/BigDataStuff/boat-y/Ansible_Files/init_replicas.js
+
+    - name: Copy elastic_doc_manager to the EC2 instance
+      copy:
+        src: /mnt/d/BigDataStuff/boat-y/Ansible_Files/elastic_doc_manager.py
+        # dest: /home/ec2-user
+        dest: /usr/local/lib/python2.7/site-packages/mongo_connector/doc_managers/elastic_doc_manager.py
+        force: no
+      become: yes
+
+
+
+
+    # - name: Install Java 1.8.0
+    #   yum:
+    #     name: java-1.8.0
+    #     state: latest
+    #
+    # - name: Remove Java 1.7.0
+    #   yum:
+    #     name: java-1.7.0-openjdk
+    #     state: removed
+
+    # - name: Configure yum to install logstash package at /etc/yum.repos.d/logstash.repo # Create the yum config directory to designate how to install
+    #   copy:
+    #     dest: /etc/yum.repos.d/logstash.repo # Destination repo
+    #     force: no # Creates a new file if not there already.
+    #     content: | # Content of yum config. Tells it where to go and what to do during install.
+    #       [logstash-6.x]
+    #       name=Elastic repository for 6.x packages
+    #       baseurl=https://artifacts.elastic.co/packages/6.x/yum
+    #       gpgcheck=1
+    #       gpgkey=https://artifacts.elastic.co/GPG-KEY-elasticsearch
+    #       enabled=1
+    #       autorefresh=1
+    #       type=rpm-md
+    #
+    # - name: Install LogStash
+    #   yum:
+    #     name: logstash
+    #     state: latest
