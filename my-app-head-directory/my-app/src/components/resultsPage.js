@@ -65,10 +65,12 @@ export class ResultsPage extends React.Component {
         return (
           <div>
               <DateBox date= {this.state.date}/>
-              <div>
-                {this.state.songs && <SongBox songs = {this.state.songs}/>}
-                <br/>
+              <div className="historyBox">
                 {this.state.headlines &&  <HistoryBox history = {this.state.headlines}/>}
+              </div>
+              <br/>
+              <div className="songBox">
+                {this.state.songs && <SongBox songs = {this.state.songs}/>}
               </div>
           </div>
         );
@@ -98,7 +100,7 @@ export class DateBox extends React.Component {
 
     render(){
         return (
-          <div>
+          <div className= "dateBox">
               <h1>The Sound of {this.parseDates()}</h1>
           </div>
         );
@@ -149,13 +151,13 @@ export class SongBox extends React.Component {
 
     render(){
         return (
-          <div>
+          <div className="songsBox">
             <h1>Top 100 Billboard Chart</h1>
                 <div>
                     <ol>
                          {
                             this.songs.map((songInfo) => {
-                                return <li>{songInfo.artist}</li>
+                                return <li>{songInfo.title} by {songInfo.artist}</li>
                             })
                       }
                   </ol>
@@ -180,7 +182,7 @@ export class HistoryBox extends React.Component {
 
     render(){
         return (
-            <div>
+            <div className="historyBox">
             <h1>New York Times Headlines</h1>
                 <ul>{
                         this.history.map((item) => {

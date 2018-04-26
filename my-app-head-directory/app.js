@@ -7,7 +7,7 @@ var app = express();
 var mongoClient = mongodb.MongoClient;
 var client;
 
-mongoClient.connect('mongodb://52.40.13.91:27017', (err, client1) => {
+mongoClient.connect('mongodb://52.37.120.142:27017', (err, client1) => {
     if (err) {
         throw err;
     } else {
@@ -74,8 +74,12 @@ app.get('/result/:query', (req, res) => {
 
         // call to the db
         collection.findOne({beginDate: date}, (err, result) => {
+            if (err) {
+                console.log("erore");
+            }
+            console.log(result);
             var arraySongs = new Array(15);
-            for (var index = 0; index < 15; index++) {
+            for (var index = 0; index < 50; index++) {
                 arraySongs[index] = {};
             }
             //this is for a date input search by user, hence no date or id accepted
