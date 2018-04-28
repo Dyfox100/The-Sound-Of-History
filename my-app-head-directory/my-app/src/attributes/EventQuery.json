@@ -55,7 +55,7 @@
 ],
 "2010s" : [
 	{"Event": "Boston Marathon Bombing ", "Year": "2013" ,"BeginDate" :"20130414", "EndDate": "20130417", "Query" :"boston marathon"},
-	{"Event": "Back Lives Matter Movement Starts With Wurder of Trayvon Martin", "Year": "2013" ,"BeginDate" :"20130716", "EndDate": "20130719", "Query" :"black lives matter"},
+	{"Event": "Trayvon Martin Tragedy Sparks Black Lives Matter Movement", "Year": "2013" ,"BeginDate" :"20130716", "EndDate": "20130719", "Query" :"black lives matter"},
 	{"Event": "DOMA overturned by Supreme Court ", "Year": "2015" ,"BeginDate" :"20150601", "EndDate": "20150630", "Query" :"defense of marriage act "},
 	{"Event": "Gay Marriage Ruled Legal in All 50 States", "Year": "2015" ,"BeginDate" :"20150616", "EndDate": "20150630", "Query" :"gay "},
 	{"Event": "Trump is President Except Huger ", "Year": "2018" ,"BeginDate" :"20180120", "EndDate": "20180122", "Query" :"trump"}
