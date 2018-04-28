@@ -15,46 +15,63 @@ export class ResultsPage extends React.Component {
 
     constructor(props){
         super(props);
-        this.state = {"headlines":[]};
+        var date = this.props.location.state;
+        switch(date.length) {
+            case 10:
+                if (date[2] === "/") {
+                    date = date.slice(0, 2) + "-" + date.slice(3, 5) + "-" + date.slice(6);
+                }
+                break;
+            case 8:
+                date = "0" + date.slice(0,1) + "-0" + date.slice(2, 3) + "-" + date.slice(4);
+                break;
+            case 9:
+                if (date[1] === "-" || date[1] === "/") {
+                    date = "0" + date.slice(0,1) + "-" + date.slice(2, 4) + "-" + date.slice(5);
+                }
+                else if (date[4] === "-" || date[4] === "/"){
+                    date = date.slice(0, 2) + "-0" + date.slice(3, 4) + "-" + date.slice(5);
+                }
+                break;
+        }
+        console.log(date);
+        this.state = {date: date};
+        this.getInfo = this.getInfo.bind(this);
     }
+
     componentDidMount = () => {
-      this.info = this.getInfo();
+      this.getInfo();
     }
 
     getInfo = () => {
-      fetch("/result/" + this.props.location.state, {
-        headers: {
-        'Content-Type': 'application/json',
-        'Accept': 'application/json'
-      }
-  }).then((res) => res.json())
-  //.then(headlineArray => {this.setState({"headlines": headlineArray[1].headline.main})});
+    //suffix of /result is date
+        fetch("/result/" + this.state.date,{
+            headers:
+            {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json'
+            }
+        }).then((res) => res.json()).then(headlinesAndSongs => {
+            this.setState(
+            {
+              "headlines": headlinesAndSongs.headlines,
+              "songs":headlinesAndSongs.songs
+            });
+            // console.log("this");
+            //console.log(this.state.songs);
+        });
     }
     render(){
-        const history = ['1', '2','3','4','5','6','7','8','9','10'];
-        const songs = {
-           song1: "This is a test song",
-           artist1: "This is an artist",
-           peakPosition1: "This is a peak position",
-           lastWeek1: "This is last week",
-           weeksOnChart1: "This is weeks",
-           song2: "This is a test song 2",
-           artist2: "This is an artist 2",
-           peakPosition2: "This is a peak position 2",
-           lastWeek2: "This is last week 2",
-           weeksOnChart2: "This is weeks 2"
-        };
-        const date = "2017-04-30";
         return (
           <div>
-              <DateBox date= {date}/>
-              <div>
-                  <HistoryBox history = {history}/>
-                  <br/>
-                  <SongBox songs = {songs}/>
+              <DateBox date= {this.state.date}/>
+              <div className="historyBox">
+                {this.state.headlines &&  <HistoryBox history = {this.state.headlines}/>}
               </div>
-              <p>{this.state.headlines}</p>
-              <p>{this.props.location.state}</p>
+              <br/>
+              <div className="songBox">
+                {this.state.songs && <SongBox songs = {this.state.songs}/>}
+              </div>
           </div>
         );
     }
@@ -74,16 +91,16 @@ export class DateBox extends React.Component {
         let months = ['January', 'February', 'March', 'April', 'May', 'June',
         'July', 'August', 'September', 'October', 'November', 'December'];
 
-        let year = this.date.slice(0, 4);
-        let day = this.date.slice(8, 10);
-        let month = months[Number(this.date.slice(5, 7)) -1];
+        let year = this.date.slice(6);
+        let day = this.date.slice(3, 5);
+        let month = months[Number(this.date.slice(0, 2)) -1];
 
         return month + " " + day + ", " + year;
     }
 
     render(){
         return (
-          <div>
+          <div className= "dateBox">
               <h1>The Sound of {this.parseDates()}</h1>
           </div>
         );
@@ -100,6 +117,7 @@ export class SongBox extends React.Component {
     constructor(props){
         super(props);
         this.songs = this.props.songs;
+        //console.log(this.props.songs);
         this.parseSongs = this.parseSongs.bind(this);
     }
     parseSongs(){
@@ -133,14 +151,14 @@ export class SongBox extends React.Component {
 
     render(){
         return (
-          <div>
-            <h1>Songs</h1>
+          <div className="songsBox">
+            <h1>Top 100 Billboard Chart</h1>
                 <div>
                     <ol>
-                        {
-                            this.parseSongs().map((songObject) => {
-                                return <li>{songObject.song}</li>
-                        })
+                         {
+                            this.songs.map((songInfo) => {
+                                return <li>{songInfo.title} by {songInfo.artist}</li>
+                            })
                       }
                   </ol>
                 </div>
@@ -159,16 +177,15 @@ export class HistoryBox extends React.Component {
     constructor(props){
         super(props);
         this.history = this.props.history;
+        console.log(this.history);
     }
 
     render(){
         return (
-            <div>
-                <h1>
-                    {this.history[0]}
-                </h1>
+            <div className="historyBox">
+            <h1>New York Times Headlines</h1>
                 <ul>{
-                    this.history.slice(1,10).map((item) => {
+                        this.history.map((item) => {
                         return<li> {item}</li>
                     })
                 }
@@ -188,7 +205,7 @@ export class HistoryBox extends React.Component {
 /*
 WebFont.load({
     google: {
-        families: ['Playfair Display', 'serif']
+        families: ['Playfair Display', 'serif'],
     }
-    console.log("Executed Correctly");
+
 });*/

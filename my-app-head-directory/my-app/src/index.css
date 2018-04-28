@@ -17,6 +17,14 @@ body {
    margin-right: 10%;
    margin-left: 10%;
 }
+.historyBox {
+    align: left;
+    color:Blue;
+}
+.songBox {
+    align: center;
+    color: green;
+}
 
 .title {
     text-align: center;
