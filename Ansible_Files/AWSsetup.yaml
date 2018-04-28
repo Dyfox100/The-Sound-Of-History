@@ -25,7 +25,7 @@
         count_tag: # What instances are being monitored
           Name: Boaty_Test
         instance_tags: # Tags to search for instance
-          "Name": "Boaty_Mongo_Checking"
+          "Name": "4/28_Full_Mongo_Database"
           "Team Name": "Boat-y"
         region: us-west-2 # Region that instance is created in
       register: ec2_out # Output of instance variables
@@ -36,7 +36,7 @@
     - name: Generate local_ip
       set_fact: # Sets a variable
         ec2_ip: "{{ec2_out['tagged_instances'][0]['public_ip']}}" # Gets the ip of the ec2 instance
-        # ec2_ip: 54.191.187.239
+        # ec2_ip: 35.163.154.156
 
     - name: Add a host to the group to_be_provisioned
       add_host: # Add a host for who will perform actions
@@ -107,82 +107,12 @@
         dest: /home/ec2-user # Destination file on EC2
       become: yes # I had to put this here again
 
-    # - name: run python script to populate database
-    #   command: python BillBoard_To_Mongo_Python_scripts/Billboard_Parsing_Main.py
+    - name: run python script to populate database
+      command: python BillBoard_To_Mongo_Python_scripts/Billboard_Parsing_Main.py
 
 
-    #ELASTICSEARCH
-
-    - name: install elasticSearch RPM package
-      yum:
-        name: https://download.elastic.co/elasticsearch/release/org/elasticsearch/distribution/rpm/elasticsearch/2.3.3/elasticsearch-2.3.3.rpm
-        state: present
-
-    - name: Register ElasticSearch as a system service
-      command: chkconfig --add elasticsearch
-
-    - name: Install AWS Cloud plugin
-      command: bin/plugin install cloud-aws
-      args:
-        chdir: /usr/share/elasticsearch/
-
-    - name: Set ES_Heap_Size
-      replace:
-        path: /etc/sysconfig/elasticsearch
-        regexp: '#ES_HEAP_SIZE=2g'
-        replace: '#ES_HEAP_SIZE=0.5g'
-
-    - name: Start ElasticSearch Service
-      service:
-        name: elasticsearch
-        state: started
-    # curl localhost:9200/_cluster/health?pretty to check if server is running
-
-    # MONGO-CONNECTOR
-
-
-    - name: Install Mongo-Connector
-      pip:
-        name: 'mongo-connector[elastic2-aws]'
-      # mongo-connector -m localhost:27017 -t localhost:9200 -d elastic2_doc_manager
-
-    - name: Create Directories for Replica Sets
-      file:
-        state: directory
-        dest: /home/ec2-user/rs1
-
-    - file:
-        state: directory
-        dest: /home/ec2-user/rs2
-
-    - file:
-        state: directory
-        dest: /home/ec2-user/rs3
-
-
-    - name: Create Mongo Replica Sets
-      shell: |
-        mongod --replSet bbtop100 --logpath "rs1/1.log" --dbpath rs1 --port 27018 &
-        mongod --replSet bbtop100 --logpath "rs2/2.log" --dbpath rs2 --port 27019 &
-        mongod --replSet bbtop100 --logpath "rs3/3.log" --dbpath rs3 --port 27020 &
-      # Use command rs.status(); within mongo to see if replica sets are active
-
-    - name: Copy Mongo Replica Init File to EC2
-      copy:
-        dest: /home/ec2-user
-        src: /mnt/d/BigDataStuff/boat-y/Ansible_Files/init_replicas.js
-
-    - name: Copy elastic_doc_manager to the EC2 instance
-      copy:
-        src: /mnt/d/BigDataStuff/boat-y/Ansible_Files/elastic_doc_manager.py
-        # dest: /home/ec2-user
-        dest: /usr/local/lib/python2.7/site-packages/mongo_connector/doc_managers/elastic_doc_manager.py
-        force: no
-      become: yes
-
-
-
-
+    # ELASTICSEARCH
+    #
     # - name: Install Java 1.8.0
     #   yum:
     #     name: java-1.8.0
@@ -192,6 +122,113 @@
     #   yum:
     #     name: java-1.7.0-openjdk
     #     state: removed
+    #
+    # # - name: Install ElasticSearch RPM Package
+    # #   get_url:
+    # #     url: https://artifacts.elastic.co/downloads/elasticsearch/elasticsearch-6.2.4.rpm
+    # #     dest: /etc/yum.repos.d/elasticsearch.repo
+    #
+    # - name: Configure yum to install elasticSearch
+    #   copy:
+    #     dest: /etc/yum.repos.d/elasticsearch.repo
+    #     force: no
+    #     content: |
+    #       [elasticsearch-6.x]
+    #       name=Elasticsearch repository for 6.x packages
+    #       baseurl=https://artifacts.elastic.co/packages/6.x/yum
+    #       gpgcheck=1
+    #       gpgkey=https://artifacts.elastic.co/GPG-KEY-elasticsearch
+    #       enabled=1
+    #       autorefresh=1
+    #       type=rpm-md
+    #
+    # - name: install elasticSearch
+    #   yum:
+    #     name: elasticsearch #-6.2.4.rpm -y
+    #
+    # - name: Register ElasticSearch as a system service
+    #   command: chkconfig --add elasticsearch
+    # #
+    # # - name: Install AWS Cloud plugin
+    # #   command: bin/elasticsearch-plugin install cloud-aws
+    # #   args:
+    # #     chdir: /usr/share/elasticsearch/
+    # #
+    # - name: Set ES_Heap_Size
+    #   replace:
+    #     path: /etc/sysconfig/elasticsearch
+    #     regexp: '#ES_HEAP_SIZE=2g'
+    #     replace: '#ES_HEAP_SIZE=0.5g'
+    #
+    # - name: Change ElasticSearch Xmx Setting
+    #   replace:
+    #     path: /etc/elasticsearch/jvm.options
+    #     regexp: 'Xmx1g'
+    #     replace: 'Xmx512m'
+    #
+    # - name: Change ElasticSearch Xms Setting
+    #   replace:
+    #     path: /etc/elasticsearch/jvm.options
+    #     regexp: 'Xms1g'
+    #     replace: 'Xms512m'
+    #
+    # - name: Start ElasticSearch Service
+    #   service:
+    #     name: elasticsearch
+    #     state: started
+    # # # curl localhost:9200/_cluster/health?pretty to check if server is running
+    # #
+    # # # MONGO-CONNECTOR
+    # #
+    # - name: Install Mongo-Connector
+    #   pip:
+    #     name: 'mongo-connector'
+    #
+    # - name: Install Mongo-Connector ElasticSearch package
+    #   pip:
+    #     name: 'mongo-connector[elastic5]'
+    #   # mongo-connector -m localhost:27017 -t localhost:9200 -d elastic2_doc_manager
+    #
+    # - name: Create Directories for Replica Sets
+    #   file:
+    #     state: directory
+    #     dest: /home/ec2-user/rs1
+    #
+    # - file:
+    #     state: directory
+    #     dest: /home/ec2-user/rs2
+    #
+    # - file:
+    #     state: directory
+    #     dest: /home/ec2-user/rs3
+    # #
+    # #
+    # # - name: Create Mongo Replica Sets
+    # #   shell: |
+    # #     mongod --replSet bbtop100 --logpath "rs1/1.log" --dbpath rs1 --port 27017 &
+    # #     mongod --replSet bbtop100 --logpath "rs2/2.log" --dbpath rs2 --port 27018 &
+    # #     mongod --replSet bbtop100 --logpath "rs3/3.log" --dbpath rs3 --port 27019
+    # #  # Use ps -ef | grep mongod to see if replica sets are active
+    #
+    # - name: Copy Mongo Replica Init File to EC2
+    #   copy:
+    #     dest: /home/ec2-user
+    #     src: /mnt/d/BigDataStuff/boat-y/Ansible_Files/init_replicas.js
+
+
+    # - name: Copy elastic_doc_manager to the EC2 instance
+    #   copy:
+    #     src: /mnt/d/BigDataStuff/boat-y/Ansible_Files/elastic_doc_manager.py
+    #     # dest: /home/ec2-user
+    #     dest: /usr/local/lib/python2.7/site-packages/mongo_connector/doc_managers/elastic_doc_manager.py
+    #     force: no
+    #   become: yes
+
+
+
+
+
+
 
     # - name: Configure yum to install logstash package at /etc/yum.repos.d/logstash.repo # Create the yum config directory to designate how to install
     #   copy:

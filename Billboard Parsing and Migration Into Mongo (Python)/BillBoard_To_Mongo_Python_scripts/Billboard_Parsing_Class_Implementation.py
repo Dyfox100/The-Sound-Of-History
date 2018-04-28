@@ -20,7 +20,7 @@ class BillBoardParser:
     Return Value: Constructed Object.
     """
 
-    def __init__(self, host='localhost', top_100_num_years_to_get=25, top_100_weekly_num_songs_to_get=50, top_200_num_songs_to_get=200):
+    def __init__(self, host='localhost', top_100_num_years_to_get=63, top_100_weekly_num_songs_to_get=50, top_200_num_songs_to_get=200):
 
         self._host = host
 
@@ -160,6 +160,7 @@ class BillBoardParser:
                 strII = str(ii+1)
 
                 strTitle = 'title_'+strII
+                dictToAppend[strTitle] = chart[ii].title
 
                 strArtist = 'artist_' + strII
                 dictToAppend[strArtist] = chart[ii].artist
