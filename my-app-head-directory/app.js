@@ -1,58 +1,73 @@
 var express = require('express');
 var path = require('path');
-var mongodb = require('mongodb');
+//var mongodb = require('mongodb');
 var request = require("request");
 var app = express();
+var elasticsearch = require('elasticsearch');
+var client = new elasticsearch.Client({
+    hosts: ['https://username:password@host:port']
+});
 
 var mongoClient = mongodb.MongoClient;
-var client;
+var mclient;
 
 mongoClient.connect('mongodb://52.37.120.142:27017', (err, client1) => {
     if (err) {
         throw err;
     } else {
-        client = client1;
+        mclient = client1;
         console.log("Successfully Connected");
     }
 });
 
-app.get('/songtest', (req, res) => {
-    var db = client.db("top_100_weekly");
-    //console.log("Connected to Mongo");
-    var collection = db.collection("songs");
-    //console.log(count);
-    let date = "2018-03-17";
-    collection.findOne({endDate: date}, (err, result) => {
-        var arraySongs = new Array(15);
-        for (var index = 0; index < 15; index++) {
-            arraySongs[index] = {};
-        }
-        //console.log(arraySongs);
-        //console.log(result);
-        //this is for a date input search by user, hence no date or id accepted
-        for (var key in result) {
-            if (key != "_id" && key != "beginDate" && key != "endDate") {
-                let lastChar = key.slice(-2)
+// app.get('/songtest', (req, res) => {
+//     var db = client.db("top_100_weekly");
+//     //console.log("Connected to Mongo");
+//     var collection = db.collection("songs");
+//     //console.log(count);
+//     let date = "2018-03-17";
+//     collection.findOne({endDate: date}, (err, result) => {
+//         var arraySongs = new Array(15);
+//         for (var index = 0; index < 15; index++) {
+//             arraySongs[index] = {};
+//         }
+//         //console.log(arraySongs);
+//         //console.log(result);
+//         //this is for a date input search by user, hence no date or id accepted
+//         for (var key in result) {
+//             if (key != "_id" && key != "beginDate" && key != "endDate") {
+//                 let lastChar = key.slice(-2)
 
-                if (lastChar[0] == "_") {
-                    arraySongs[Number(lastChar[1]) - 1][key.slice(0, -2)] = result[key];
-                    //console.log(result[key]);
-                } else {
-                    arraySongs[Number(lastChar) - 1][key.slice(0, -3)] = result[key];
-                //console.log(result[key]);
-                }
-            }
-        }
-        res.send(arraySongs);
-    });
-});
+//                 if (lastChar[0] == "_") {
+//                     arraySongs[Number(lastChar[1]) - 1][key.slice(0, -2)] = result[key];
+//                     //console.log(result[key]);
+//                 } else {
+//                     arraySongs[Number(lastChar) - 1][key.slice(0, -3)] = result[key];
+//                 //console.log(result[key]);
+//                 }
+//             }
+//         }
+//         res.send(arraySongs);
+//     });
+// });
 
 
 
 //app.use(express.static(__dirname + 'my-app/src'));
+
+client.ping({
+    requestTimeout: 30000,
+}, function(error){
+    if (error) {
+        console.error("Cluster is down!");
+    } else {
+        console.log('Everything is okay')
+    }
+});
+
 app.get('/result/:query', (req, res) => {
     //db connection
-    var db = client.db("top_100_weekly");
+    var db = mclient.db("top_100_weekly");
     var collection = db.collection("songs");
 
     var info = {"update": "this didn´t update"};
