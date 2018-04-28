@@ -15,7 +15,9 @@ export class ResultsPage extends React.Component {
 
     constructor(props){
         super(props);
+        //date passed in from search page
         var date = this.props.location.state;
+        //makes sure format matches backend requirements
         switch(date.length) {
             case 10:
                 if (date[2] === "/") {
@@ -45,7 +47,8 @@ export class ResultsPage extends React.Component {
 
     getInfo = () => {
     //suffix of /result is date
-        fetch("/result/" + this.state.date,{
+        //pass through null for end date and query values with search bar request
+        fetch("/result?begindate=" + this.state.date + "&enddate=&nytquery=",{
             headers:
             {
                 'Content-Type': 'application/json',
@@ -57,8 +60,6 @@ export class ResultsPage extends React.Component {
               "headlines": headlinesAndSongs.headlines,
               "songs":headlinesAndSongs.songs
             });
-            // console.log("this");
-            //console.log(this.state.songs);
         });
     }
     render(){
@@ -75,9 +76,6 @@ export class ResultsPage extends React.Component {
           </div>
         );
     }
-    displays(){
-
-    }
 }
 // ----- END OF INTERFACE -----
 
@@ -88,6 +86,7 @@ export class DateBox extends React.Component {
       this.parseDates = this.parseDates.bind(this);
     }
     parseDates() {
+        //numbers as input, but want to display month
         let months = ['January', 'February', 'March', 'April', 'May', 'June',
         'July', 'August', 'September', 'October', 'November', 'December'];
 
@@ -105,50 +104,14 @@ export class DateBox extends React.Component {
           </div>
         );
     }
-    getDate(){
-
-    }
-    setDate(){
-
-    }
 }
 
 export class SongBox extends React.Component {
     constructor(props){
         super(props);
         this.songs = this.props.songs;
-        //console.log(this.props.songs);
-        this.parseSongs = this.parseSongs.bind(this);
     }
-    parseSongs(){
-        var song = "";
-        var artist = "";
-        var peak = "";
-        var last = "";
-        var weeks = "";
-        let songList = []
-
-        // store songs/artists/info in a list of objects
-        for (var i=1; i<3; i++){
-            let songTemp = this.songs["song" + i.toString()];
-            let artistTemp = this.songs["artist" + i.toString()];
-            let peakTemp = this.songs["peakPosition" + i.toString()];
-            let lastTemp = this.songs["lastWeek" + i.toString()];
-            let weeksTemp = this.songs["weeksOnChart" + i.toString()];
-
-            let rank = {
-                song: songTemp,
-                artist: artistTemp,
-                peak: peakTemp,
-                last: lastTemp,
-                weeks: weeksTemp
-            }
-
-            songList.push(rank);
-        }
-        return songList;
-    }
-
+    
     render(){
         return (
           <div className="songsBox">
@@ -164,12 +127,6 @@ export class SongBox extends React.Component {
                 </div>
               </div>
         );
-    }
-    setSongList(){
-
-    }
-    getSongList(){
-
     }
 }
 
@@ -193,13 +150,6 @@ export class HistoryBox extends React.Component {
 
             </div>
         );
-    }
-
-    setHistory(){
-
-    }
-    getHistory(){
-
     }
 }
 /*

@@ -56,7 +56,6 @@ export class SearchBar extends React.Component {
     }
 
     handleSubmit(event){
-        alert('This is what was searched: ' + this.state.value);
         event.preventDefault();
         this.setState({ready: true})
     }

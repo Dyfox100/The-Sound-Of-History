@@ -65,15 +65,15 @@ client.ping({
     }
 });
 
-app.get('/result/:query', (req, res) => {
+app.get('/result', (req, res) => {
     //db connection
     var db = mclient.db("top_100_weekly");
     var collection = db.collection("songs");
 
     var info = {"update": "this didn´t update"};
-    const input = req.params.query;
+    const input = req.query.begindate;
     //check type of input
-    if (input[2] === input[5] && (input[2] === '/' || input[2] === '-')){
+    if (input[2] === input[5] && (input[2] === '-')){
         // key for the NYT API
         var url = "https://api.nytimes.com/svc/search/v2/articlesearch.json?api-key=5a1867eea1154ea0a495d421ea1263a4";
 
@@ -90,7 +90,7 @@ app.get('/result/:query', (req, res) => {
         // call to the db
         collection.findOne({beginDate: date}, (err, result) => {
             if (err) {
-                console.log("erore");
+                console.log("error");
             }
             console.log(result);
             var arraySongs = new Array(15);
