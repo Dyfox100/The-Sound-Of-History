@@ -25,13 +25,11 @@ class Home extends React.Component {
                 <Router>
                     <div>
                         <NavBar />
-                            <div className="container">
                                 <Switch>
                                     <Route exact={true} path='/' component={ SearchPage } />
                                     <Route exact={true} path='/EventSuggest' component={ EventSuggest } />
                                     <Route path='/ResultsPage' component={ ResultsPage } />
                                 </Switch>
-                            </div>
                     </div>
                 </Router>
     );
