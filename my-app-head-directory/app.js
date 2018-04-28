@@ -1,11 +1,11 @@
 var express = require('express');
 var path = require('path');
-//var mongodb = require('mongodb');
+var mongodb = require('mongodb');
 var request = require("request");
 var app = express();
 var elasticsearch = require('elasticsearch');
 var client = new elasticsearch.Client({
-    hosts: ['https://username:password@host:port']
+    hosts: ['https://52.40.142.247:9200']
 });
 
 var mongoClient = mongodb.MongoClient;
