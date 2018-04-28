@@ -133,7 +133,8 @@ app.get('/result/:query', (req, res) => {
         });
 
     } else {
-        console.log('this is not a date. try again.');
+        //elastic search for song name.
+        client.search
     }
 });
 
