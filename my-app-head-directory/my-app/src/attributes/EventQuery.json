@@ -9,10 +9,10 @@
 	{"Event": "Vietnam Protests Across US Campuses", "Year": "1967" ,"BeginDate" :"19600201", "EndDate": "19670428", "Query" :"vietnam protests campus"},
 	{"Event": "MLK Jr. Assassinated", "Year": "1968" ,"BeginDate" :"19680402", "EndDate": "19680405", "Query" :"assassination"},
 	{"Event": "Nixon Sworn in as President ", "Year": "1969" ,"BeginDate" :"19690119", "EndDate": "19690120", "Query" :"sworn"},
-	{"Event": "USA Walks on the Moon", "Year": "1969" ,"BeginDate" :"19690719", "EndDate": "19690721", "Query" :"neil armstrong"}
+	{"Event": "USA Walks on the Moon", "Year": "1969" ,"BeginDate" :"19690719", "EndDate": "19690721", "Query" :"neil armstrong"},
 	{"Event": "Woodstock", "Year": "1969" ,"BeginDate" :"19690801", "EndDate": "19690830", "Query" :"woodstock"}
-], 
-"1970s" : [ 
+],
+"1970s" : [
 	{"Event": "Kent State Shooting", "Year": "1970" ,"BeginDate" :"19700504", "EndDate": "19700506", "Query" :"kent state"},
 	{"Event": "Nixon Ends The Gold Standard", "Year": "1971" ,"BeginDate" :"19710814", "EndDate": "19710816", "Query" :"gold standard nixon"},
 	{"Event": "Nixon Resigns", "Year": "1974" ,"BeginDate" :"19740808", "EndDate": "19740812", "Query" :"nixon resigns"},
@@ -31,7 +31,7 @@
 	{"Event": "GHW Bush declares a ‘War on Drugs’", "Year": "1989" ,"BeginDate" :"19890905", "EndDate": "19890907", "Query" :"war on drugs"},
 	{"Event": "Berlin Wall Comes Down", "Year": "1989" ,"BeginDate" :"19891108", "EndDate": "19891110", "Query" :"BERLIN WALL"},
 	{"Event": "Trump likes games because money.", "Year": "1989" ,"BeginDate" :"19891113", "EndDate": "19891118", "Query" :"Donald Trump"}
-], 
+],
 "1990s" : [
 	{"Event": "Hubble Launced", "Year": "1990","BeginDate": "19900505", "EndDate": "19900528", "Query" :"hubble"},
 	{"Event": "Oklahoma City Bombing", "Year": "1991" ,"BeginDate": "19910518", "EndDate": "19950519", "Query": "oklahoma"},

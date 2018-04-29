@@ -14,7 +14,8 @@
     "react-router-dom": "^4.2.2",
     "react-scripts": "^1.1.4",
     "reactstrap": "^5.0.0",
-    "webfontloader": "^1.6.28"
+    "webfontloader": "^1.6.28",
+    "react-strap": "^0.00.00"
   },
   "scripts": {
     "start": "react-scripts start",
