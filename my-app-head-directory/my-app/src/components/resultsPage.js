@@ -70,7 +70,7 @@ export class ResultsPage extends React.Component {
 
     getInfo = () => {
     //suffix of /result is date
-        //pass through null for end date and query values with search bar request
+        //pass through string to node server 
         fetch("/result?begindate=" + this.state.beginDate + "&enddate=" + this.state.endDate + "&nytquery=" + this.state.query,{
             headers:
             {
