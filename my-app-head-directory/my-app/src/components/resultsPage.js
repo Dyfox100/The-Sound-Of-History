@@ -36,7 +36,7 @@ export class ResultsPage extends React.Component {
                     break;
                 case 8:
                     if (beginDate.includes("-") || beginDate.includes("/")){
-                        beginDate = "0" + beginDate.slice(0,1) + "-0" + beginDate.slice(2, 3) + "-" + beginDate.slice(4);   
+                        beginDate = "0" + beginDate.slice(0,1) + "-0" + beginDate.slice(2, 3) + "-" + beginDate.slice(4);
                     }
                     break;
                 case 9:
@@ -48,7 +48,7 @@ export class ResultsPage extends React.Component {
                     }
                     break;
             }
-        }else{ 
+        }else{
             //query comes frome event suggest
             beginDate = this.props.location.state.begindate;
             beginDate = beginDate.slice(4,6) + "-" + beginDate.slice(6) + "-" + beginDate.slice(0,4);
@@ -58,7 +58,7 @@ export class ResultsPage extends React.Component {
             this.state.endDate = endDate;
             this.state.query = query;
         }
-        
+
         this.state.beginDate = beginDate;
         this.getInfo = this.getInfo.bind(this);
         console.log(this.state);
@@ -70,7 +70,7 @@ export class ResultsPage extends React.Component {
 
     getInfo = () => {
     //suffix of /result is date
-        //pass through null for end date and query values with search bar request
+        //pass through string to node server
         fetch("/result?begindate=" + this.state.beginDate + "&enddate=" + this.state.endDate + "&nytquery=" + this.state.query,{
             headers:
             {
@@ -134,7 +134,7 @@ export class SongBox extends React.Component {
         super(props);
         this.songs = this.props.songs;
     }
-    
+
     render(){
         return (
           <div className="songsBox">
@@ -166,7 +166,7 @@ export class HistoryBox extends React.Component {
             <h1>New York Times Headlines</h1>
                 <ul>{
                         this.history.map((item) => {
-                        return<li> {item}</li>
+                        return<li> {item} <br/>  </li>
                     })
                 }
                 </ul>
