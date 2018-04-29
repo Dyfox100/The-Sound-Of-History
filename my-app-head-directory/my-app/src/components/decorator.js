@@ -13,59 +13,6 @@ import { EventSuggest } from './eventSuggestPage.js'
 // import css files
 import 'bootstrap/dist/css/bootstrap.css';
 
-// ----- END OF IMPORTS -----
-
-// class Title extends React.Component {
-//    var titleName = "";
-//
-//    render(){
-//       return(
-//
-//       );
-//    }
-//
-//    setTitleName(){
-//
-//    }
-// }
-
-// class SearchDataBase extends React.Component {
-//    var queryInput = ""
-//
-//    render(){
-//       return (
-//
-//       );
-//    }
-//
-//    query(){
-//
-//    }
-//    sendRequest(){
-//
-//    }
-// }
-
-// class Button extends React.Component {
-//    var buttonName = "";
-//    var updateButton;
-//
-//    render(){
-//       return (
-//
-//       );
-//    }
-//    setButtonName(){
-//
-//    }
-//    setUpdateButton(){
-//
-//    }
-//    getUpdateButton(){
-//
-//    }
-// }
-
 export class NavBar extends React.Component {
     render(){
         return (

@@ -5,6 +5,8 @@ import ReactDOM from 'react-dom';
 
 import WebFont from 'webfontloader';
 import { InputGroup, InputGroupAddon, Button, Input, NavLink } from 'reactstrap';
+import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+
 
 // Import json Event Suggest file with hardCode 
 import EventQuery from '../attributes/EventQuery.json';
@@ -25,14 +27,19 @@ export class EventSuggest extends React.Component {
     	// let eventLength = console.log((this.EventQuery["2010s"]).length);
         return (
         	<div>
-        	<h1>Event Suggest Page</h1>
+        	<h1>Event Suggestions Page</h1>
         		<h2>1960</h2>
         			<div>
         				<ul>
         					{this.EventQuery["1960s"].map((eventObject) => {
         						return (
         							<li>
-        								{eventObject.Year}: {eventObject.Event}
+        								<Link to={{pathname: '/ResultsPage', state: {
+                                                begindate: eventObject.BeginDate,
+                                                enddate: eventObject.EndDate,
+                                                query: eventObject.Query
+                                            }
+                                        }}>{eventObject.Year}: {eventObject.Event}</Link>
           							</li>
         						)
         					})
@@ -45,7 +52,12 @@ export class EventSuggest extends React.Component {
         					{this.EventQuery["1970s"].map((eventObject) => {
         						return (
         							<li>
-        								{eventObject.Year}: {eventObject.Event}
+        								<Link to={{pathname: '/ResultsPage', state: {
+                                                begindate: eventObject.BeginDate,
+                                                enddate: eventObject.EndDate,
+                                                query: eventObject.Query
+                                            }
+                                        }}>{eventObject.Year}: {eventObject.Event}</Link>
           							</li>
         						)
         					})
@@ -58,7 +70,12 @@ export class EventSuggest extends React.Component {
         					{this.EventQuery["1980s"].map((eventObject) => {
         						return (
         							<li>
-        								{eventObject.Year}: {eventObject.Event}
+        								<Link to={{pathname: '/ResultsPage', state: {
+                                                begindate: eventObject.BeginDate,
+                                                enddate: eventObject.EndDate,
+                                                query: eventObject.Query
+                                            }
+                                        }}>{eventObject.Year}: {eventObject.Event}</Link>
           							</li>
         						)
         					})
@@ -71,7 +88,12 @@ export class EventSuggest extends React.Component {
         					{this.EventQuery["1990s"].map((eventObject) => {
         						return (
         							<li>
-        								{eventObject.Year}: {eventObject.Event}
+        								<Link to={{pathname: '/ResultsPage', state: {
+                                                begindate: eventObject.BeginDate,
+                                                enddate: eventObject.EndDate,
+                                                query: eventObject.Query
+                                            }
+                                        }}>{eventObject.Year}: {eventObject.Event}</Link>
           							</li>
         						)
         					})
@@ -84,7 +106,12 @@ export class EventSuggest extends React.Component {
         					{this.EventQuery["2000s"].map((eventObject) => {
         						return (
         							<li>
-        								{eventObject.Year}: {eventObject.Event}
+        								<Link to={{pathname: '/ResultsPage', state: {
+                                                begindate: eventObject.BeginDate,
+                                                enddate: eventObject.EndDate,
+                                                query: eventObject.Query
+                                            }
+                                        }}>{eventObject.Year}: {eventObject.Event}</Link>
           							</li>
         						)
         					})
@@ -97,7 +124,12 @@ export class EventSuggest extends React.Component {
         					{this.EventQuery["2010s"].map((eventObject) => {
         						return (
         							<li>
-        								{eventObject.Year}: {eventObject.Event}
+        								<Link to={{pathname: '/ResultsPage', state: {
+                                                begindate: eventObject.BeginDate,
+                                                enddate: eventObject.EndDate,
+                                                query: eventObject.Query
+                                            }
+                                        }}>{eventObject.Year}: {eventObject.Event}</Link>
           							</li>
         						)
         					})
@@ -111,28 +143,6 @@ export class EventSuggest extends React.Component {
     }
 }
 // ----- END OF INTERFACE -----
-
-// class YearBox extends React.Component {
-//    var yearName = "";
-//
-//    render(){
-//       return (
-//
-//       );
-//    }
-//    setYearName(){
-//
-//    }
-//    yearEvents(){
-//
-//    }
-// }
-//
-// WebFont.load({
-//     google: {
-//         families: ['Playfair Display', 'serif']
-//     }
-// });
 //
 // ReactDOM.render(
 //    <EventSuggest />,

@@ -15,30 +15,53 @@ export class ResultsPage extends React.Component {
 
     constructor(props){
         super(props);
+        var beginDate;
+        var endDate;
+        var query;
+        this.state = {
+            beginDate: "",
+            endDate: "",
+            query: ""
+
+        };
         //date passed in from search page
-        var date = this.props.location.state;
-        //makes sure format matches backend requirements
-        switch(date.length) {
-            case 10:
-                if (date[2] === "/") {
-                    date = date.slice(0, 2) + "-" + date.slice(3, 5) + "-" + date.slice(6);
-                }
-                break;
-            case 8:
-                date = "0" + date.slice(0,1) + "-0" + date.slice(2, 3) + "-" + date.slice(4);
-                break;
-            case 9:
-                if (date[1] === "-" || date[1] === "/") {
-                    date = "0" + date.slice(0,1) + "-" + date.slice(2, 4) + "-" + date.slice(5);
-                }
-                else if (date[4] === "-" || date[4] === "/"){
-                    date = date.slice(0, 2) + "-0" + date.slice(3, 4) + "-" + date.slice(5);
-                }
-                break;
+        if (typeof this.props.location.state == "string"){
+            beginDate = this.props.location.state;
+            //makes sure format matches backend requirements mm-dd-yyyy
+            switch(beginDate.length) {
+                case 10:
+                    if (beginDate[2] === "/") {
+                        beginDate = beginDate.slice(0, 2) + "-" + beginDate.slice(3, 5) + "-" + beginDate.slice(6);
+                    }
+                    break;
+                case 8:
+                    if (beginDate.includes("-") || beginDate.includes("/")){
+                        beginDate = "0" + beginDate.slice(0,1) + "-0" + beginDate.slice(2, 3) + "-" + beginDate.slice(4);   
+                    }
+                    break;
+                case 9:
+                    if (beginDate[1] === "-" || beginDate[1] === "/") {
+                        beginDate = "0" + beginDate.slice(0,1) + "-" + beginDate.slice(2, 4) + "-" + beginDate.slice(5);
+                    }
+                    else if (beginDate[4] === "-" || beginDate[4] === "/"){
+                        beginDate = beginDate.slice(0, 2) + "-0" + beginDate.slice(3, 4) + "-" + beginDate.slice(5);
+                    }
+                    break;
+            }
+        }else{ 
+            //query comes frome event suggest
+            beginDate = this.props.location.state.begindate;
+            beginDate = beginDate.slice(4,6) + "-" + beginDate.slice(6) + "-" + beginDate.slice(0,4);
+            endDate = this.props.location.state.enddate;
+            endDate = endDate.slice(4,6) + "-" + endDate.slice(6) + "-" + endDate.slice(0,4);
+            query = this.props.location.state.query;
+            this.state.endDate = endDate;
+            this.state.query = query;
         }
-        console.log(date);
-        this.state = {date: date};
+        
+        this.state.beginDate = beginDate;
         this.getInfo = this.getInfo.bind(this);
+        console.log(this.state);
     }
 
     componentDidMount = () => {
@@ -48,7 +71,7 @@ export class ResultsPage extends React.Component {
     getInfo = () => {
     //suffix of /result is date
         //pass through null for end date and query values with search bar request
-        fetch("/result?begindate=" + this.state.date + "&enddate=&nytquery=",{
+        fetch("/result?begindate=" + this.state.beginDate + "&enddate=" + this.state.endDate + "&nytquery=" + this.state.query,{
             headers:
             {
                 'Content-Type': 'application/json',
@@ -65,7 +88,7 @@ export class ResultsPage extends React.Component {
     render(){
         return (
           <div>
-              <DateBox date= {this.state.date}/>
+              <DateBox date= {this.state.beginDate}/>
               <div className="historyBox">
                 {this.state.headlines &&  <HistoryBox history = {this.state.headlines}/>}
               </div>
