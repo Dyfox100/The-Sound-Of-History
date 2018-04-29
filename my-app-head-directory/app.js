@@ -11,7 +11,7 @@ var client = new elasticsearch.Client({
 var mongoClient = mongodb.MongoClient;
 var mclient;
 
-mongoClient.connect('mongodb://52.37.120.142:27017', (err, client1) => {
+mongoClient.connect('mongodb://localhost:27017', (err, client1) => {
     if (err) {
         throw err;
     } else {
@@ -20,42 +20,7 @@ mongoClient.connect('mongodb://52.37.120.142:27017', (err, client1) => {
     }
 });
 
-// app.get('/songtest', (req, res) => {
-//     var db = client.db("top_100_weekly");
-//     //console.log("Connected to Mongo");
-//     var collection = db.collection("songs");
-//     //console.log(count);
-//     let date = "2018-03-17";
-//     collection.findOne({endDate: date}, (err, result) => {
-//         var arraySongs = new Array(15);
-//         for (var index = 0; index < 15; index++) {
-//             arraySongs[index] = {};
-//         }
-//         //console.log(arraySongs);
-//         //console.log(result);
-//         //this is for a date input search by user, hence no date or id accepted
-//         for (var key in result) {
-//             if (key != "_id" && key != "beginDate" && key != "endDate") {
-//                 let lastChar = key.slice(-2)
-
-//                 if (lastChar[0] == "_") {
-//                     arraySongs[Number(lastChar[1]) - 1][key.slice(0, -2)] = result[key];
-//                     //console.log(result[key]);
-//                 } else {
-//                     arraySongs[Number(lastChar) - 1][key.slice(0, -3)] = result[key];
-//                 //console.log(result[key]);
-//                 }
-//             }
-//         }
-//         res.send(arraySongs);
-//     });
-// });
-
-
-
-//app.use(express.static(__dirname + 'my-app/src'));
-
-client.ping({
+/*client.ping({
     requestTimeout: 30000,
 }, function(error){
     if (error) {
@@ -63,36 +28,47 @@ client.ping({
     } else {
         console.log('Everything is okay')
     }
-});
+});*/
 
 app.get('/result', (req, res) => {
     //db connection
     var db = mclient.db("top_100_weekly");
     var collection = db.collection("songs");
-
     var info = {"update": "this didn´t update"};
-    const input = req.query.begindate;
+    const beginDateInput = req.query.begindate;
+    const endDateInput = req.query.enddate;
+    const queryInput = req.query.nytquery;
+    console.log("beginDate: " + req.query.begindate);
+    console.log("query: " + req.query.nytquery);
+    console.log("enddate: " + req.query.enddate);
     //check type of input
-    if (input[2] === input[5] && (input[2] === '-')){
+    if (beginDateInput[2] === beginDateInput[5] && (beginDateInput[2] === '-')){
         // key for the NYT API
         var url = "https://api.nytimes.com/svc/search/v2/articlesearch.json?api-key=5a1867eea1154ea0a495d421ea1263a4";
 
-        // set start and end dates based on user input for NYT search
-        const dateInputNYTimes =   input.slice(6)  + input.slice(0,2) + input.slice(3,5);
-        url = url + "&begin_date=" + dateInputNYTimes + "&end_date=" + dateInputNYTimes;
-        const dateInputMongo = input;
+         // set start and end dates based on input
+        const beginDate = beginDateInput.slice(6)  + beginDateInput.slice(0,2) + beginDateInput.slice(3,5);
+
+        if (endDateInput !== "") {
+            const endDate =  endDateInput.slice(6) + endDateInput.slice(0,2) + endDateInput.slice(3,5);
+            url = url + "&begin_date=" + beginDate + "&end_date=" + endDate + "&q=" + queryInput;
+        } else {
+            url = url + "&begin_date=" + beginDate + "&end_date=" + beginDate;
+        }
+        console.log("URL: " + url);
 
         // convert date to a Sunday since start dates are Sundays for weekly charts for Billboard datea
-        let date = new Date(dateInputMongo);
+        let date = new Date(beginDateInput);
         date.setDate(date.getDate()-date.getDay());
         date = date.toJSON().slice(0,10);
+
 
         // call to the db
         collection.findOne({beginDate: date}, (err, result) => {
             if (err) {
                 console.log("error");
             }
-            console.log(result);
+            // console.log(result);
             var arraySongs = new Array(15);
             for (var index = 0; index < 50; index++) {
                 arraySongs[index] = {};
@@ -120,7 +96,7 @@ app.get('/result', (req, res) => {
                     let jsonRes = JSON.parse(body);
                     info = jsonRes.response.docs;
                     info = info.map((doc) => {
-                        return doc.headline.main;
+                        return doc.headline.main + ": " + doc.snippet;
                     })
                     const jsonToSend =
                     {
