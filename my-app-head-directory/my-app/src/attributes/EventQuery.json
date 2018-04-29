@@ -2,7 +2,7 @@
 	{"Event": "Greensboro Lunch Counter sit-in", "Year": "1960" ,"BeginDate" :"19600201", "EndDate": "19600210", "Query" :"greensboro sit-in"},
 	{"Event": "JFK Sworn in as President", "Year": "1961" ,"BeginDate" :"19610119", "EndDate": "19610120", "Query" :"sworn in"},
 	{"Event": "Cuban Missile Crisis", "Year": "1962" ,"BeginDate" :"19621016", "EndDate": "19621028", "Query" :"cuban missile crisis"},
-	{"Event": "JFK Assassinated", "Year": "1963" ,"BeginDate" :"19631122", "EndDate": "19631123", "Query" :"president"},
+	{"Event": "JFK Assassinated", "Year": "1963" ,"BeginDate" :"19631122", "EndDate": "19631123", "Query" :"assassin"},
 	{"Event": "Johnson Sworn in as President", "Year": "1963" ,"BeginDate" :"19631122", "EndDate": "19631123", "Query" :"president johnson"},
 	{"Event": "The Beatles Arrive in the US", "Year": "1964" ,"BeginDate" :"19640205", "EndDate": "19640208", "Query" :"ed sullivan beatles"},
 	{"Event": "Civil Rights Act of 1964", "Year": "1964" ,"BeginDate" :"19640701", "EndDate": "19640704", "Query" :"Civil Rights Act of 1964"},
@@ -55,9 +55,9 @@
 ],
 "2010s" : [
 	{"Event": "Boston Marathon Bombing ", "Year": "2013" ,"BeginDate" :"20130414", "EndDate": "20130417", "Query" :"boston marathon"},
-	{"Event": "Trayvon Martin Tragedy Sparks Black Lives Matter Movement", "Year": "2013" ,"BeginDate" :"20130716", "EndDate": "20130719", "Query" :"black lives matter"},
-	{"Event": "DOMA overturned by Supreme Court ", "Year": "2015" ,"BeginDate" :"20150601", "EndDate": "20150630", "Query" :"defense of marriage act "},
+	{"Event": "Trayvon Martin Tragedy Sparks Black Lives Matter Movement", "Year": "2013" ,"BeginDate" :"20171001", "EndDate": "20171031", "Query" :"black lives matter"},
+	{"Event": "DOMA overturned by Supreme Court", "Year": "2015" ,"BeginDate" :"20150601", "EndDate": "20150630", "Query" :"defense of marriage act "},
 	{"Event": "Gay Marriage Ruled Legal in All 50 States", "Year": "2015" ,"BeginDate" :"20150616", "EndDate": "20150630", "Query" :"gay "},
-	{"Event": "Trump is President Except Huger ", "Year": "2018" ,"BeginDate" :"20180120", "EndDate": "20180122", "Query" :"trump"}
+	{"Event": "Trump is President Except Huger", "Year": "2017" ,"BeginDate" :"20170120", "EndDate": "20170122", "Query" :"trump"}
 ]
 }
