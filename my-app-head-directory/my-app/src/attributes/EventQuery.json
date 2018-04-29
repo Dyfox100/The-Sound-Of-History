@@ -10,6 +10,7 @@
 	{"Event": "MLK Jr. Assassinated", "Year": "1968" ,"BeginDate" :"19680402", "EndDate": "19680405", "Query" :"assassination"},
 	{"Event": "Nixon Sworn in as President ", "Year": "1969" ,"BeginDate" :"19690119", "EndDate": "19690120", "Query" :"sworn"},
 	{"Event": "USA Walks on the Moon", "Year": "1969" ,"BeginDate" :"19690719", "EndDate": "19690721", "Query" :"neil armstrong"}
+	{"Event": "Woodstock", "Year": "1969" ,"BeginDate" :"19690801", "EndDate": "19690830", "Query" :"woodstock"}
 ], 
 "1970s" : [ 
 	{"Event": "Kent State Shooting", "Year": "1970" ,"BeginDate" :"19700504", "EndDate": "19700506", "Query" :"kent state"},
@@ -36,7 +37,9 @@
 	{"Event": "Oklahoma City Bombing", "Year": "1991" ,"BeginDate": "19910518", "EndDate": "19950519", "Query": "oklahoma"},
 	{"Event": "Bill Clinton Sworn into Office", "Year": "1993", "BeginDate": "19930119", "EndDate": "19930120", "Query" :"clinton"},
 	{"Event": "New York Times Launches a Website", "Year": "1993" ,"BeginDate": "19960119", "EndDate": "19960123", "Query": "world wide web"},
+	{"Event": "Kurt Cobain Dies", "Year": "1994" ,"BeginDate": "19940405", "EndDate": "19940406", "Query": "world wide web"},
 	{"Event": "Olympics in Atlanta", "Year": "1996" ,"BeginDate": "19960717", "EndDate": "19960717", "Query": "OLYMPIC GAMES (1996)"},
+	{"Event": "Tupac Murdered", "Year": "1996" ,"BeginDate": "19960913", "EndDate": "19960915", "Query": "Tupac"},
 	{"Event": "The Internet Takes Off.", "Year": "1996" ,"BeginDate": "19961220", "EndDate": "19961223", "Query": "internet"},
 	{"Event": "Trump Announces He Should Be President. ", "Year": "1999" ,"BeginDate": "19990801", "EndDate": "19991118", "Query": "Donald Trump"},
 	{"Event": "Y2K", "Year": "1999" ,"BeginDate": "20001121", "EndDate": "20001201", "Query": "Y2K"}
@@ -58,6 +61,7 @@
 	{"Event": "Trayvon Martin Tragedy Sparks Black Lives Matter Movement", "Year": "2013" ,"BeginDate" :"20171001", "EndDate": "20171031", "Query" :"black lives matter"},
 	{"Event": "DOMA overturned by Supreme Court", "Year": "2015" ,"BeginDate" :"20150601", "EndDate": "20150630", "Query" :"defense of marriage act "},
 	{"Event": "Gay Marriage Ruled Legal in All 50 States", "Year": "2015" ,"BeginDate" :"20150616", "EndDate": "20150630", "Query" :"gay "},
+	{"Event": "Bob Dylan Wins The Nobel Prize in Literature", "Year": "2015" ,"BeginDate" :"20161012", "EndDate": "20161016", "Query" :"nobel "},
 	{"Event": "Trump is President Except Huger", "Year": "2017" ,"BeginDate" :"20170120", "EndDate": "20170122", "Query" :"trump"}
 ]
 }
