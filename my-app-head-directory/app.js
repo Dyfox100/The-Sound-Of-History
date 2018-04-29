@@ -20,7 +20,7 @@ mongoClient.connect('mongodb://localhost:27017', (err, client1) => {
     }
 });
 
-client.ping({
+/*client.ping({
     requestTimeout: 30000,
 }, function(error){
     if (error) {
@@ -28,7 +28,7 @@ client.ping({
     } else {
         console.log('Everything is okay')
     }
-});
+});*/
 
 app.get('/result', (req, res) => {
     //db connection
@@ -38,9 +38,9 @@ app.get('/result', (req, res) => {
     const beginDateInput = req.query.begindate;
     const endDateInput = req.query.enddate;
     const queryInput = req.query.nytquery;
-
-    console.log("query" + req.query.nytquery);
-    console.log("enddate" + req.query.enddate);
+    console.log("beginDate: " + req.query.begindate);
+    console.log("query: " + req.query.nytquery);
+    console.log("enddate: " + req.query.enddate);
     //check type of input
     if (beginDateInput[2] === beginDateInput[5] && (beginDateInput[2] === '-')){
         // key for the NYT API
@@ -49,12 +49,13 @@ app.get('/result', (req, res) => {
          // set start and end dates based on input
         const beginDate = beginDateInput.slice(6)  + beginDateInput.slice(0,2) + beginDateInput.slice(3,5);
 
-        if (endDate !== "") {
-            const endDate =  endDateInput.slice(6) + endDateInput.slice(0,2) + beginDateInput.slice(3,5);
+        if (endDateInput !== "") {
+            const endDate =  endDateInput.slice(6) + endDateInput.slice(0,2) + endDateInput.slice(3,5);
             url = url + "&begin_date=" + beginDate + "&end_date=" + endDate + "&q=" + queryInput;
         } else {
             url = url + "&begin_date=" + beginDate + "&end_date=" + beginDate;
         }
+        console.log("URL: " + url);
 
         // convert date to a Sunday since start dates are Sundays for weekly charts for Billboard datea
         let date = new Date(beginDateInput);
@@ -95,7 +96,7 @@ app.get('/result', (req, res) => {
                     let jsonRes = JSON.parse(body);
                     info = jsonRes.response.docs;
                     info = info.map((doc) => {
-                        return doc.headline.main;
+                        return doc.headline.main + ": " + doc.snippet;
                     })
                     const jsonToSend =
                     {
