@@ -1,0 +1,137 @@
+# ansible-playbook -i hosts example.yaml
+# cd /mnt
+# ssh -i Boaty-test.pem ec2-user@((PUT EC2 IPV4 HERE))
+# is the ubuntu command to ssh into the EC2 instance
+--- # tell ansible that it's a yaml file
+- name: Create the database on EC2 server # name of playbook
+  hosts: local # Where it runs from
+  gather_facts: no # don't gather environment variables
+
+  vars_files:
+    - keys.yaml # Loaded files with AWS info
+
+  tasks: # What it will do
+
+    - name: Create EC2 instance # Name of task
+      ec2: # What command is being executed
+        key_name: Boaty-test # name of pem
+        instance_type: t2.micro # instance size
+        aws_access_key: "{{aws_access_key}}"
+        aws_secret_key: "{{aws_secret_key}}"
+        image: ami-d874e0a0 # What type of instance it will be
+        wait: yes # wait to do other tasks until finished
+        group: Test-wizard-16 # What security group it is under
+        exact_count: 1 # How many instances are active
+        count_tag: # What instances are being monitored
+          Name: Boaty_Test
+        instance_tags: # Tags to search for instance
+          "Name": "Boaty_Mongo_Database"
+          "Team Name": "Boat-y"
+        region: us-west-2 # Region that instance is created in
+      register: ec2_out # Output of instance variables
+
+    # - debug:
+    #     msg: "{{ec2_out}}" # this is how variables are used
+
+    - name: Generate local_ip
+      set_fact: # Sets a variable
+        ec2_ip: "{{ec2_out['tagged_instances'][0]['public_ip']}}" # Gets the ip of the ec2 instance
+        # ec2_ip: 18.236.127.151
+
+    - name: Add a host to the group to_be_provisioned
+      add_host: # Add a host for who will perform actions
+        hostname: "{{ec2_ip}}" # The ip of the EC2 instance so the instance is the one doing this stuff
+        ansible_ssh_private_key_file: Elastic_Bodie_Machine.pem
+        ansible_user: ec2-user
+        groupname: to_be_provisioned
+        with_items: ec2.instances
+
+    - name: Wait for SSH # Need to wait for server to startup before ssh'ing into it
+      wait_for:
+        host: "{{ec2_ip}}" # Who is SSHing
+        port: 22 # port for ssh
+        state: started
+        # delay: 10
+
+    # - name: Make a temp file # Canary to see if we are in the instance
+    #   file:
+    #     path: /home/ec2-user/test.txt # Where to make the file
+    #     state: touch # What the instance is doing
+    #   delegate_to: "{{ec2_ip}}" # What host is performing this action
+
+- name: Setup Mongo and ElasticSearch
+  hosts: to_be_provisioned # Performs actions on the EC2 instance, not locally.
+  become: yes # use sudo
+
+  tasks:
+
+    # - name: Configure yum to install mongo package at /etc/yum.repos.d/mongodb-org-3.6.repo # Create the yum config directory to designate how to install
+    #   copy:
+    #     dest: /etc/yum.repos.d/mongodb-org-3.6.repo # Destination repo
+    #     force: no # Creates a new file if not there already.
+    #     content: | # Content of yum config. Tells it where to go and what to do during install.
+    #       [mongodb-org-3.6]
+    #       name=MongoDB Repository
+    #       baseurl=https://repo.mongodb.org/yum/amazon/2013.03/mongodb-org/3.6/x86_64/
+    #       gpgcheck=1
+    #       enabled=1
+    #       gpgkey=https://www.mongodb.org/static/pgp/server-3.6.asc
+
+    # - name: Yum install mongo
+    #   yum:
+    #     name: mongodb-org # What the package name is
+    #     state: latest # What version it should be installed as
+
+    # - name: Start the mongod service
+    #   service:
+    #     name: mongod # name of service
+    #     state: started # start the service
+
+    - name: Copy the python scripts to scrape billboard to the ec2 server
+      copy: # copies from local machine to EC2 instance
+        src: /User/bensinnett/Desktop/to_copy # local source file. Don't know how to only be in git repo.
+        dest: /home/ec2-user # Destination file on EC2
+      become: yes # I had to put this here again
+
+    # - name: pip install billboard.py # Installing needed python modules
+    #   pip:
+    #     name: billboard.py
+
+    # - name: pip install pymongo # More modules
+    #   pip:
+    #     name: pymongo
+
+    # - name: run python script to populate database
+    #   command: python BillBoard_To_Mongo_Python_scripts/Billboard_Parsing_Main.py
+
+    - name: install elasticSearch RPM package
+      yum:
+        name: https://download.elastic.co/elasticsearch/release/org/elasticsearch/distribution/rpm/elasticsearch/2.3.3/elasticsearch-2.3.3.rpm
+        state: present
+
+    - name: Register ElasticSearch as a system service
+      command: chkconfig --add elasticsearch
+
+    - name: Install AWS Cloud plugin
+      command: bin/plugin install cloud-aws
+      args:
+        chdir: /usr/share/elasticsearch/
+
+    - name: Set ES_Heap_Size
+      replace:
+        path: /etc/sysconfig/elasticsearch
+        regexp: '#ES_HEAP_SIZE=2g'
+        replace: '#ES_HEAP_SIZE=0.5g'
+
+    - name: Start ElasticSearch Service
+      service:
+        name: elasticsearch
+        state: started
+
+    # - name: Move to hot100 directory
+    #       command:  cd /home/ec2-user
+
+    # - name: create index in elasticsearch
+    #     uri:
+    #       url:  "@hot_100_charts.json"
+
