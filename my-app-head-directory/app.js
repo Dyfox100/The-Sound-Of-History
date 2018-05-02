@@ -31,9 +31,12 @@ client.ping({
 });
 
 client.search({
-    index: "bbtop100",
+    index: "new_bbtop100",
     type: "songs",
-    q: "Drake"
+    body: {
+        
+
+    }
     }
 ).then((body) => console.log(body.hits.hits));
 
