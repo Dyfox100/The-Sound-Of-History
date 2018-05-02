@@ -3,8 +3,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 
 import WebFont from 'webfontloader';
-import { InputGroup, InputGroupAddon, Button,
-    Col, Row, Container, Input, NavLink } from 'reactstrap';
+import { InputGroup, InputGroupAddon, Button, Input, NavLink, Container } from 'reactstrap';
 import { Redirect } from "react-router-dom";
 
 // import css files
@@ -23,36 +22,17 @@ WebFont.load({
 export class SearchPage extends React.Component {
     render(){
         return (
-            <div>
-                <div className="centerPage">
-                    <h1 className="centerContent">The Sound of History</h1>
-                    <div className="centerSearch">
-                        <SearchBar/>
-                    </div>
-                    <div className="centerContent">
-                        <DescriptionBox/>
-                    </div>
-                </div>
+            <div className="searchPage search-background">
+                <Container>
+                    <h1>The Sound of History</h1>
+                    <SearchBar/>
+                    <p>Search a date to explore the soundtrack of United States history.</p>
+                </Container>
             </div>
         );
     }
 }
 // ----- END OF INTERFACE -----
-
-export class DescriptionBox extends React.Component {
-    constructor(props){
-        super(props);
-        this.description = "Search a date to explore the soundtrack of United States history.";
-    }
-
-    render(){
-       return (
-          <div className="DescriptionBox">
-             <p>{this.description}</p>
-          </div>
-       );
-    }
-}
 
 export class SearchBar extends React.Component {
     constructor(props){

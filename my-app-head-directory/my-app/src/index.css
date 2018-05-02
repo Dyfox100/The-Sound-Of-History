@@ -3,10 +3,13 @@
   src: url("https://fonts.googleapis.com/css?family=Rajdhani:300,400,500,600,700" rel="stylesheet")
 }
 
+@@font-face {
+    font-family: 'Monoton', cursive;
+    src: url(href="https://fonts.googleapis.com/css?family=Monoton" rel="stylesheet");
+}
+
 #root {
-  font-family: 'Rajdhani', sans-serif;
-  background: src("/img/record-player.jpg");
-  background-size: cover;
+font-family: 'Rajdhani', sans-serif;
 }
 
 ul {
@@ -26,12 +29,10 @@ Link {
     height: 50%;
 }
 
-.centerContent {
-    display: flex;
-    justify-content: center;
+.searchPage {
+    padding-top: 20%;
+    text-align: center;
     color: white;
-    font-weight: 700;
-    /* font-size: 3em; */
 }
 .DescriptionBox {
     text-align: center;
@@ -41,15 +42,15 @@ Link {
 }
 
 
-.centerPage {
-    padding-top: 18%;
+.searchPage h1 {
+    font-size: 3em;
 }
 
 .search-background {
     background: url('./img/minimalist.jpg') no-repeat center center;
     background-size: cover;
     flex: 1;
-    height: 92vh;
+    height: 85vh;
 }
 
 centerContent: {
