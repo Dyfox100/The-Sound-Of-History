@@ -5,22 +5,36 @@ import ReactDOM from 'react-dom';
 import WebFont from 'webfontloader';
 import { InputGroup, InputGroupAddon, Button, Input, NavLink } from 'reactstrap';
 import { Redirect } from "react-router-dom";
+import BackgroundImage from 'react-background-image-loader';
 
 // import css files
 import '../index.css';
 import 'bootstrap/dist/css/bootstrap.css';
+
+WebFont.load({
+    google: {
+        families: ['Rajdhani', 'sans-serif'],
+    }
+});
+
 // ----- END OF IMPORTS -----
 
 // ----- INTERFACE -----
 export class SearchPage extends React.Component {
     render(){
-      return (
-        <div>
-          <SearchBar/>
-          <br/>
-          <DescriptionBox/>
-        </div>
-      );
+        return (
+            <div>
+                <div className="centerPage">
+                    <h1 className="centerContent">The Sound of History</h1>
+                    <div className="centerSearch">
+                        <SearchBar/>
+                    </div>
+                    <div className="centerContent">
+                        <DescriptionBox/>
+                    </div>
+                </div>
+            </div>
+        );
     }
 }
 // ----- END OF INTERFACE -----
@@ -28,7 +42,7 @@ export class SearchPage extends React.Component {
 export class DescriptionBox extends React.Component {
     constructor(props){
         super(props);
-        this.description = "Please update the project description here.";
+        this.description = "Search a date to explore the soundtrack of United States history.";
     }
 
     render(){
@@ -66,6 +80,7 @@ export class SearchBar extends React.Component {
             <InputGroup>
                 <Input
                   type="text"
+                  placeholder="DD/MM/YYYY"
                   value={this.state.value}
                   onChange={this.updateSearch}
                 />

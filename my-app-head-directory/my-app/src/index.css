@@ -1,47 +1,41 @@
-/* @fontface {
-  font-family: 'Domine', serif;
-  src: url('https://fonts.googleapis.com/css?family=Domine:400,700')
-} */
-
-body {
-  font-family: 'Playfair Display', serif;
-  /* text-align:center;
-  font-size:1.5em;
-  margin-left:10%;
-  margin-right:10%;
-  margin-bottom:10%;
-  margin-top:10%; */
+@fontface {
+  font-family: 'Rajdhani', sans-serif;
+  src: url("https://fonts.googleapis.com/css?family=Rajdhani:300,400,500,600,700" rel="stylesheet")
 }
 
-#searchBox {
-   margin-right: 10%;
-   margin-left: 10%;
-}
-.historyBox {
-    align: left;
-    color:Blue;
-}
-.songBox {
-    align: center;
-    color: green;
-}
-
-.title {
-    text-align: center;
-    font-size: 3em;
+#root {
+  font-family: 'Rajdhani', sans-serif;
+  background: src("/img/record-player.jpg");
+  background-size: cover;
 }
 
 ul {
     list-style-type: none;
 }
 
-/* .title {
-  display:block;
-  margin-left:auto;
-  margin-right:auto;
-  width:80%;
-} */
-
 p {
-  font-size: 1em;
+  font-size: 1.5em;
+}
+
+Link {
+    color: white;
+}
+
+.centerContent {
+    display: flex;
+    justify-content: center;
+    color: white;
+    font-weight: 700;
+    /* font-size: 3em; */
+}
+
+.centerPage {
+    padding-top: 18%;
+}
+
+.search-background {
+    background: url('./img/minimalist.jpg') no-repeat center center;
+    background-size: cover;
+    flex: 1;
+    height: 100vh;
 }
