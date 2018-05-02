@@ -9,7 +9,6 @@ import { BrowserRouter as Router, Route, Link, Switch } from "react-router-dom";
 // import components
 import { ResultsPage, HistoryBox, SongBox } from "./components/resultsPage.js"
 import { SearchPage } from './components/searchPage.js'
-import { NavBar } from './components/decorator.js'
 import { EventSuggest } from './components/eventSuggestPage.js'
 
 // import css files
@@ -23,15 +22,14 @@ import './index.css';
 class Home extends React.Component {
     render(){
         return (
-                <Router>
-                    <div>
-                        <NavBar />
-                                <Switch>
-                                        <Route exact={true} path='/' component={ SearchPage } />
-                                        <Route path='/ResultsPage' component={ ResultsPage } />
-                                </Switch>
-                    </div>
-                </Router>
+            <Router>
+                <div>
+                    <Switch>
+                        <Route exact={true} path='/' component={ SearchPage } />
+                        <Route path='/ResultsPage' component={ ResultsPage } />
+                    </Switch>
+                </div>
+            </Router>
     );
   }
 }

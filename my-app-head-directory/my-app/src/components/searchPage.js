@@ -1,11 +1,13 @@
 // ----- IMPORTS -----
 import React from 'react';
 import ReactDOM from 'react-dom';
+import ScrollableAnchor from 'react-scrollable-anchor'
 
 import WebFont from 'webfontloader';
 import { InputGroup, InputGroupAddon, Button, Input, NavLink, Container } from 'reactstrap';
 import { Redirect } from "react-router-dom";
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+import { NavBar } from './decorator.js'
 
 
 // Import json Event Suggest file with hardCode
@@ -27,13 +29,23 @@ WebFont.load({
 export class SearchPage extends React.Component {
     render(){
         return (
-            <div className="searchPage search-background">
-                <Container>
-                    <h1>The Sound of History</h1>
-                    <SearchBar/>
-                    <p>Search a date to explore the soundtrack of United States history.</p>
-                </Container>
-                <EventSuggest/>
+            <div>
+                <NavBar />
+                <div className="searchPage search-background">
+                    <Container>
+                        <h1>The Sound of History</h1>
+                        <SearchBar/>
+                        <p>Search a date to explore the soundtrack of United States history.</p>
+                        <div className="down">
+                            <a href="#downEvents">More Events</a>
+                        </div>
+                    </Container>
+                </div>
+                <ScrollableAnchor id ={'downEvents'}>
+                    <div className="eventSuggest">
+                        <EventSuggest/>
+                    </div>
+                </ScrollableAnchor>
             </div>
         );
     }
@@ -93,7 +105,7 @@ export class EventSuggest extends React.Component {
     render(){
         return (
         	<div>
-        	<h1 className="centerContent">Event Suggestions Page</h1>
+        	<h1 className="centerContent">Event Suggestions</h1>
         		<h2>1960</h2>
         			<div>
         				<ul>

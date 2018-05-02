@@ -35,9 +35,31 @@ Link {
     margin-bottom: 5%;
 }
 
+.down {
+    padding-top: 30%;
+}
+
 .search-background {
     background: url('./img/minimalist.jpg') no-repeat center center;
     background-size: cover;
     flex: 1;
     height: 85vh;
+}
+.eventSuggest {
+    background-color: rgba(247,241,216,0.5);
+    padding-top: 5%;
+    padding-left: 4%;
+}
+
+.eventSuggest h1 {
+    font-size: 4em;
+}
+
+.eventSuggest h2 {
+    font-size: 1.5em;
+}
+
+.eventSuggest li {
+    font-size: 1.5em;
+
 }
