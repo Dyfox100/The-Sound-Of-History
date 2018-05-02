@@ -4,10 +4,16 @@ import ReactDOM from 'react-dom';
 import ScrollableAnchor from 'react-scrollable-anchor';
 
 import WebFont from 'webfontloader';
-import { InputGroup, InputGroupAddon, Button, Input, NavLink, Container, Row, Col } from 'reactstrap';
+import { InputGroup,
+        InputGroupAddon,
+        Button,
+        Input,
+        NavLink,
+        Container,
+        Row,
+        Col } from 'reactstrap';
 import { Redirect } from "react-router-dom";
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
-import { NavBar } from './decorator.js';
 
 // Import images
 import logo from '../img/TSOH.png';
@@ -23,8 +29,8 @@ import ten from '../img/2010s.png'
 import EventQuery from '../attributes/EventQuery.json';
 
 // import css files
-import '../index.css';
 import 'bootstrap/dist/css/bootstrap.css';
+import '../index.css';
 
 WebFont.load({
     google: {
@@ -38,12 +44,13 @@ export class SearchPage extends React.Component {
     render(){
         return (
             <div>
-                <NavBar />
                 <div className="searchPage search-background">
                     <Container>
-                        <img src={logo} alt="Sound of History" width="80%" />
-                        <SearchBar/>
-                        <p>Search a date to explore the soundtrack of history.</p>
+                        <div className="searchContent">
+                            <img src={logo} alt="Sound of History" width="80%" />
+                            <SearchBar/>
+                            <p>Search a date to explore the soundtrack of history.</p>
+                        </div>
                     </Container>
                     <div className="down">
                         <a href="#EventSuggestions">
@@ -90,7 +97,7 @@ export class SearchBar extends React.Component {
     render(){
         return (
           <div id="searchBox">
-            <InputGroup>
+            <InputGroup id="input">
                 <Input
                   type="text"
                   placeholder="MM/DD/YYYY"
@@ -149,8 +156,8 @@ export class EventSuggest extends React.Component {
     			</Row>
 
                 <Row className="formatRow">
-                    <Col>
-                        <img src={seventy} width='75%' class="img-responsive pull-right"/>
+                    <Col className="alignImage">
+                        <img src={seventy} width='75%'/>
                     </Col>
                     <Col>
             			<div>
@@ -201,8 +208,8 @@ export class EventSuggest extends React.Component {
                 </Row>
 
                 <Row className="formatRow">
-                    <Col>
-                        <img className="image" src={ninty} width='75%'/>
+                    <Col className="alignImage">
+                        <img src={ninty} width='75%'/>
                     </Col>
                     <Col>
         			    <div>
@@ -253,7 +260,7 @@ export class EventSuggest extends React.Component {
                 </Row>
 
                 <Row className="formatRow">
-                    <Col>
+                    <Col className="alignImage">
                         <img className="image" src={ten} width='75%'/>
                     </Col>
                     <Col>

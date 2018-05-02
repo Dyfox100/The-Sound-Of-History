@@ -3,8 +3,17 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 
 import WebFont from 'webfontloader';
-import { InputGroup, InputGroupAddon, Button, Input, NavLink, Container, Row,
-        Col, Navbar, Nav, NavItem } from 'reactstrap';
+import { InputGroup,
+        InputGroupAddon,
+        Button,
+        Input,
+        NavLink,
+        Container,
+        Row,
+        Col,
+        Navbar,
+        Nav,
+        NavItem } from 'reactstrap';
 import { BrowserRouter as Router, Route, Link, Switch } from "react-router-dom";
 
 // import components
@@ -13,12 +22,10 @@ import { SearchPage } from './components/searchPage.js'
 import { EventSuggest } from './components/eventSuggestPage.js'
 
 // import css files
-// import 'normalize.css';
+import 'bootstrap/dist/css/bootstrap.css';
 import './index.css';
-// import 'bootstrap/dist/css/bootstrap.css';
-// ----- END OF IMPORTS -----
 
-// className="search-background"
+// ----- END OF IMPORTS -----
 
 class Home extends React.Component {
     render(){

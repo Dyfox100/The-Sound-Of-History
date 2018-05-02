@@ -3,13 +3,22 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 
 import WebFont from 'webfontloader';
-import { InputGroup, InputGroupAddon, Button, Input, NavLink} from 'reactstrap';
-import { Container, Row, Col } from "reactstrap";
-import { NavBar } from './decorator.js';
+import { InputGroup,
+        InputGroupAddon,
+        Button,
+        Input,
+        Nav,
+        NavLink,
+        Navbar,
+        Container,
+        Row,
+        Col} from 'reactstrap';
+import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 
 // import css files
-import '../index.css';
 import 'bootstrap/dist/css/bootstrap.css';
+import '../index.css';
+
 // ----- END OF IMPORTS -----
 
 // ----- INTERFACE -----
@@ -91,9 +100,11 @@ export class ResultsPage extends React.Component {
         return (
             <div>
                 <div className="results-banner">
-                    <NavBar />
+                    <NavLink>
+                        <Link className="links" to={'/'} >Search</Link>
+                    </NavLink>
+                    <DateBox date={this.state.beginDate}/>
                 </div>
-                <DateBox date={this.state.beginDate}/>
                 <Container>
                         <div className="resultsPage">
                             <Row>
@@ -115,6 +126,7 @@ export class ResultsPage extends React.Component {
     }
 }
 // ----- END OF INTERFACE -----
+
 
 export class DateBox extends React.Component {
     constructor(props) {
@@ -138,7 +150,6 @@ export class DateBox extends React.Component {
         return (
             <div className= "dateBox">
                 <h1>The Sound of {this.parseDates()}</h1>
-                <hr/>
             </div>
         );
     }
