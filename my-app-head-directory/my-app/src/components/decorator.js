@@ -21,10 +21,7 @@ export class NavBar extends React.Component {
                 <Navbar color="white" expand="md">
                     <Nav className="ml-auto navbarFormat">
                         <NavLink>
-                            <Link to={'/'} >Search</Link>
-                        </NavLink>
-                        <NavLink>
-                            <Link to={'EventSuggest'}>Event Suggestions</Link>
+                            <Link className="navBar" to={'/'} >Search</Link>
                         </NavLink>
                     </Nav>
                 </Navbar>
@@ -32,9 +29,3 @@ export class NavBar extends React.Component {
         );
     }
 }
-
-// styles = {
-//     base: {
-//         Link:
-//     }
-// }
