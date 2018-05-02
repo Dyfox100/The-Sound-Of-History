@@ -22,18 +22,9 @@ export class NavBar extends React.Component {
                         <NavLink>
                             <Link to={'/'} >Search</Link>
                         </NavLink>
-                        <NavLink>
-                            <Link to={'EventSuggest'}>Event Suggestions</Link>
-                        </NavLink>
                     </Nav>
                 </Navbar>
             </div>
         );
     }
 }
-
-// styles = {
-//     base: {
-//         Link:
-//     }
-// }

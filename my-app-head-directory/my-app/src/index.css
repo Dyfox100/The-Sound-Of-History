@@ -25,13 +25,14 @@ Link {
 }
 
 .searchPage {
-    padding-top: 20%;
+    padding-top: 10%;
     text-align: center;
     color: white;
 }
 
 .searchPage h1 {
-    font-size: 3em;
+    font-size: 4em;
+    margin-bottom: 5%;
 }
 
 .search-background {
