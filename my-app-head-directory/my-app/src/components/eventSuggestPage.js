@@ -8,7 +8,7 @@ import { InputGroup, InputGroupAddon, Button, Input, NavLink } from 'reactstrap'
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 
 
-// Import json Event Suggest file with hardCode 
+// Import json Event Suggest file with hardCode
 import EventQuery from '../attributes/EventQuery.json';
 
 // import css files
@@ -23,11 +23,9 @@ export class EventSuggest extends React.Component {
 		this.EventQuery = EventQuery;
 	}
     render(){
-    	// console.log(EventQuery["2010s"][0].Event);
-    	// let eventLength = console.log((this.EventQuery["2010s"]).length);
         return (
         	<div>
-        	<h1>Event Suggestions Page</h1>
+        	<h1 className="centerContent">Event Suggestions Page</h1>
         		<h2>1960</h2>
         			<div>
         				<ul>
@@ -138,13 +136,13 @@ export class EventSuggest extends React.Component {
         			</div>
         	</div>
 
-        		
+
         );
     }
 }
-// ----- END OF INTERFACE -----
-//
-// ReactDOM.render(
-//    <EventSuggest />,
-//    document.getElementById('root')
-// );
+
+WebFont.load({
+    google: {
+        families: ['Playfair Display', 'serif'],
+    }
+});

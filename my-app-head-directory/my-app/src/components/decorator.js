@@ -3,8 +3,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 
 import WebFont from 'webfontloader';
-import { InputGroup, InputGroupAddon, Button, Input, NavLink,
-       Container, Row, Col, Navbar, Nav, NavItem } from 'reactstrap';
+import { InputGroup, InputGroupAddon, Button, Input, NavLink, Container, Row, Col, Navbar, Nav } from 'reactstrap';
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 
 // import components
@@ -19,13 +18,13 @@ export class NavBar extends React.Component {
     render(){
         return (
             <div>
-                <Navbar color="white" className="NavBar" light expand="md">
-                    <Nav className="ml-auto">
+                <Navbar expand="md">
+                    <Nav className="ml-auto navbarFormat">
                         <NavLink>
-                            <Link to={'/'} activeClassName="active" >Search</Link>
+                            <Link to={'/'} >Search</Link>
                         </NavLink>
                         <NavLink>
-                            <Link to={'EventSuggest'} >Event Suggestions</Link>
+                            <Link to={'EventSuggest'}>Event Suggestions</Link>
                         </NavLink>
                     </Nav>
                 </Navbar>

@@ -6,6 +6,7 @@ import WebFont from 'webfontloader';
 import { InputGroup, InputGroupAddon, Button, Input, NavLink, Container, Row,
         Col, Navbar, Nav, NavItem } from 'reactstrap';
 import { BrowserRouter as Router, Route, Link, Switch } from "react-router-dom";
+import BackgroundImage from 'react-background-image-loader';
 
 // import components
 import { ResultsPage, HistoryBox, SongBox } from "./components/resultsPage.js";
@@ -14,17 +15,18 @@ import { NavBar } from './components/decorator.js';
 import { EventSuggest } from './components/eventSuggestPage.js';
 
 // import css files
-import 'normalize.css';
+// import 'normalize.css';
 import './index.css';
-import 'bootstrap/dist/css/bootstrap.css';
+// import 'bootstrap/dist/css/bootstrap.css';
 // ----- END OF IMPORTS -----
 
+// className="search-background"
 
 class Home extends React.Component {
     render(){
         return (
                 <Router>
-                    <div>
+                    <div className="search-background">
                         <NavBar />
                                 <Switch>
                                     <Container>
