@@ -1,67 +1,67 @@
 {"1960s" : [
 	{"Event": "Greensboro Lunch Counter sit-in", "Year": "1960" ,"BeginDate" :"19600201", "EndDate": "19600210", "Query" :"greensboro sit-in"},
-	{"Event": "JFK Sworn in as President", "Year": "1961" ,"BeginDate" :"19610119", "EndDate": "19610120", "Query" :"sworn in"},
+	{"Event": "JFK Sworn in as President", "Year": "1961" ,"BeginDate" :"19610120", "EndDate": "19610121", "Query" :"sworn in"},
 	{"Event": "Cuban Missile Crisis", "Year": "1962" ,"BeginDate" :"19621016", "EndDate": "19621028", "Query" :"cuban missile crisis"},
 	{"Event": "JFK Assassinated", "Year": "1963" ,"BeginDate" :"19631122", "EndDate": "19631123", "Query" :"assassin"},
 	{"Event": "Johnson Sworn in as President", "Year": "1963" ,"BeginDate" :"19631122", "EndDate": "19631123", "Query" :"president johnson"},
-	{"Event": "The Beatles Arrive in the US", "Year": "1964" ,"BeginDate" :"19640205", "EndDate": "19640208", "Query" :"ed sullivan beatles"},
+	{"Event": "The Beatles Arrive in the US", "Year": "1964" ,"BeginDate" :"19640209", "EndDate": "19640224", "Query" :"ed sullivan beatles"},
 	{"Event": "Civil Rights Act of 1964", "Year": "1964" ,"BeginDate" :"19640701", "EndDate": "19640704", "Query" :"Civil Rights Act of 1964"},
 	{"Event": "Vietnam Protests Across US Campuses", "Year": "1967" ,"BeginDate" :"19600201", "EndDate": "19670428", "Query" :"vietnam protests campus"},
-	{"Event": "MLK Jr. Assassinated", "Year": "1968" ,"BeginDate" :"19680402", "EndDate": "19680405", "Query" :"assassination"},
-	{"Event": "Nixon Sworn in as President ", "Year": "1969" ,"BeginDate" :"19690119", "EndDate": "19690120", "Query" :"sworn"},
-	{"Event": "USA Walks on the Moon", "Year": "1969" ,"BeginDate" :"19690719", "EndDate": "19690721", "Query" :"neil armstrong"},
-	{"Event": "Woodstock", "Year": "1969" ,"BeginDate" :"19690801", "EndDate": "19690830", "Query" :"woodstock"}
+	{"Event": "MLK Jr. Assassinated", "Year": "1968" ,"BeginDate" :"19680404", "EndDate": "19680405", "Query" :"assassination"},
+	{"Event": "Nixon Sworn in as President ", "Year": "1969" ,"BeginDate" :"19690120", "EndDate": "19690122", "Query" :"sworn"},
+	{"Event": "USA Walks on the Moon", "Year": "1969" ,"BeginDate" :"19690720", "EndDate": "19690722", "Query" :"neil armstrong"},
+	{"Event": "Woodstock", "Year": "1969" ,"BeginDate" :"19690815", "EndDate": "19690819", "Query" :"woodstock"}
 ],
 "1970s" : [
 	{"Event": "Kent State Shooting", "Year": "1970" ,"BeginDate" :"19700504", "EndDate": "19700506", "Query" :"kent state"},
 	{"Event": "Nixon Ends The Gold Standard", "Year": "1971" ,"BeginDate" :"19710814", "EndDate": "19710816", "Query" :"gold standard nixon"},
-	{"Event": "Nixon Resigns", "Year": "1974" ,"BeginDate" :"19740808", "EndDate": "19740812", "Query" :"nixon resigns"},
-	{"Event": "Elvis is Dead", "Year": "1977" ,"BeginDate" :"19770814", "EndDate": "19770820", "Query" :"elvis dead"},
-	{"Event": "Iran Hostage Crisis", "Year": "1979" ,"BeginDate" :"19791103", "EndDate": "19791128", "Query" :"iran hostage"}
+	{"Event": "Nixon Resigns", "Year": "1974" ,"BeginDate" :"19740809", "EndDate": "19740812", "Query" :"nixon resigns"},
+	{"Event": "Elvis is Dead", "Year": "1977" ,"BeginDate" :"19770816", "EndDate": "19770820", "Query" :"elvis dead"},
+	{"Event": "Iran Hostage Crisis", "Year": "1979" ,"BeginDate" :"19791104", "EndDate": "19791106", "Query" :"iran hostage"}
 ],
 "1980s" : [
-	{"Event": "John Lennon is Assassinated", "Year": "1980" ,"BeginDate" :"19801207", "EndDate": "19801209", "Query" :"John lennon"},
-	{"Event": "Mount St. Helens Explodes", "Year": "1980" ,"BeginDate" :"19800517", "EndDate": "19800520", "Query" :"mount st. helens"},
-	{"Event": "Reagan Sworn in as President ", "Year": "1980" ,"BeginDate" :"19801019", "EndDate": "19810121", "Query" :"reagan"},
-	{"Event": "Live Aid Raises Millions for AIDS Awareness", "Year": "1985" ,"BeginDate" :"19850712", "EndDate": "19850716", "Query" :"Live aid"},
+	{"Event": "John Lennon is Assassinated", "Year": "1980" ,"BeginDate" :"19801208", "EndDate": "19801210", "Query" :"lennon"},
+	{"Event": "Mount St. Helens Explodes", "Year": "1980" ,"BeginDate" :"19800518", "EndDate": "19800520", "Query" :"mount st. helens"},
+	{"Event": "Reagan Sworn in as President ", "Year": "1980" ,"BeginDate" :"19810120", "EndDate": "19810122", "Query" :"reagan"},
+	{"Event": "Live Aid Raises Millions for AIDS Awareness", "Year": "1985" ,"BeginDate" :"19850713", "EndDate": "19850716", "Query" :"Live aid"},
 	{"Event": "Farm Aid Raises Millions for Farmers Across America", "Year": "1985" ,"BeginDate" :"19850922", "EndDate": "19850928", "Query" :"farm aid"},
 	{"Event": "Iran-Contra Affair Breaks", "Year": "1986" ,"BeginDate" :"19861102", "EndDate": "19861105", "Query" :"iran"},
 	{"Event": "Reagan Tells Gorbachev to “Tear Down That Wall”", "Year": "1987" ,"BeginDate" :"19870612", "EndDate": "19870613", "Query" :"reagan"},
-	{"Event": "GHW Bush sworn in as President ", "Year": "1989" ,"BeginDate" :"19890119", "EndDate": "19890121", "Query" :"bush"},
+	{"Event": "GHW Bush sworn in as President ", "Year": "1989" ,"BeginDate" :"19890120", "EndDate": "19890122", "Query" :"bush"},
 	{"Event": "GHW Bush declares a ‘War on Drugs’", "Year": "1989" ,"BeginDate" :"19890905", "EndDate": "19890907", "Query" :"war on drugs"},
-	{"Event": "Berlin Wall Comes Down", "Year": "1989" ,"BeginDate" :"19891108", "EndDate": "19891110", "Query" :"BERLIN WALL"},
-	{"Event": "Trump likes games because money.", "Year": "1989" ,"BeginDate" :"19891113", "EndDate": "19891118", "Query" :"Donald Trump"}
+	{"Event": "Berlin Wall Comes Down", "Year": "1989" ,"BeginDate" :"19891109", "EndDate": "19891110", "Query" :"BERLIN WALL"},
+	{"Event": "Trump Wants To Be Like Branson.", "Year": "1989" ,"BeginDate" :"19891113", "EndDate": "19891118", "Query" :"Donald Trump"}
 ],
 "1990s" : [
-	{"Event": "Hubble Launced", "Year": "1990","BeginDate": "19900505", "EndDate": "19900528", "Query" :"hubble"},
-	{"Event": "Oklahoma City Bombing", "Year": "1991" ,"BeginDate": "19910518", "EndDate": "19950519", "Query": "oklahoma"},
-	{"Event": "Bill Clinton Sworn into Office", "Year": "1993", "BeginDate": "19930119", "EndDate": "19930120", "Query" :"clinton"},
-	{"Event": "New York Times Launches a Website", "Year": "1993" ,"BeginDate": "19960119", "EndDate": "19960123", "Query": "world wide web"},
-	{"Event": "Kurt Cobain Dies", "Year": "1994" ,"BeginDate": "19940405", "EndDate": "19940406", "Query": "world wide web"},
+	{"Event": "Hubble Launced", "Year": "1990","BeginDate": "19900428", "EndDate": "19900528", "Query" :"hubble"},
+	{"Event": "Bill Clinton Sworn into Office", "Year": "1993", "BeginDate": "19930120", "EndDate": "19930120", "Query" :"sworn"},
+	{"Event": "Kurt Cobain Dies", "Year": "1994" ,"BeginDate": "19940405", "EndDate": "19940409", "Query": "Kurt Cobain"},
+	{"Event": "Oklahoma City Bombing", "Year": "1995" ,"BeginDate": "19950519", "EndDate": "19950520", "Query": "oklahoma"},
+	{"Event": "New York Times Launches a Website", "Year": "1996" ,"BeginDate": "19960119", "EndDate": "19960123", "Query": "world wide web"},
 	{"Event": "Olympics in Atlanta", "Year": "1996" ,"BeginDate": "19960717", "EndDate": "19960717", "Query": "OLYMPIC GAMES (1996)"},
-	{"Event": "Tupac Murdered", "Year": "1996" ,"BeginDate": "19960913", "EndDate": "19960915", "Query": "Tupac"},
+	{"Event": "Tupac Murdered", "Year": "1996" ,"BeginDate": "19960907", "EndDate": "19960915", "Query": "Tupac"},
 	{"Event": "The Internet Takes Off.", "Year": "1996" ,"BeginDate": "19961220", "EndDate": "19961223", "Query": "internet"},
 	{"Event": "Trump Announces He Should Be President. ", "Year": "1999" ,"BeginDate": "19990801", "EndDate": "19991118", "Query": "Donald Trump"},
-	{"Event": "Y2K", "Year": "1999" ,"BeginDate": "20001121", "EndDate": "20001201", "Query": "Y2K"}
+	{"Event": "Y2K", "Year": "1999" ,"BeginDate": "19991227", "EndDate": "19991231", "Query": "Y2K"}
 ],
 "2000s" : [
-	{"Event": "Florida Certifies Bush victory", "Year": "2000","BeginDate": "20001121", "EndDate": "19900528", "Query" :"bush"},
+	{"Event": "Florida Certifies Bush victory", "Year": "2000","BeginDate": "20001212", "EndDate": "20001214", "Query" :"bush florida"},
 	{"Event": "September 11th Terrorist Attacks", "Year": "2001","BeginDate": "20010911", "EndDate": "20010912", "Query" :"twin towers"},
 	{"Event": "US Begins Offensive Strikes on Afghanistan", "Year": "2001","BeginDate": "20011007", "EndDate": "20011009", "Query" :"afghanistan"},
-	{"Event": "US Invades Iraq", "Year": "2003","BeginDate": "20030321", "EndDate": "20030323", "Query" :"iraq"},
+	{"Event": "US Invades Iraq", "Year": "2003","BeginDate": "20030320", "EndDate": "20030323", "Query" :"iraq"},
 	{"Event": "Facebook Launches", "Year": "2004","BeginDate": "20041201", "EndDate": "20041202", "Query" :"facebook"},
 	{"Event": "Hurricane Katrina destroys parts of New Orleans", "Year": "2005","BeginDate": "20050830", "EndDate": "20050901", "Query" :"hurricane katrina"},
 	{"Event": "US  Enters The Great Recession", "Year": "2007", "BeginDate": "20071228", "EndDate": "20071230", "Query": "recession"},
 	{"Event": "Global Financial Crisis", "Year": "2008","BeginDate": "20081001", "EndDate": "20081030", "Query": "financial"},
-	{"Event": "Obama sworn in as President ", "Year": "2009","BeginDate": "20090119", "EndDate": "20090121", "Query": "president"},
-	{"Event": "Michael Jackson Dies", "Year":"2009" ,"BeginDate": "20090626", "EndDate": "20090627", "Query": "michael jackson dead"}
+	{"Event": "Obama sworn in as President ", "Year": "2009","BeginDate": "20090120", "EndDate": "20090122", "Query": "sworn"},
+	{"Event": "Michael Jackson Dies", "Year":"2009" ,"BeginDate": "20090625", "EndDate": "20090627", "Query": "michael jackson dead"}
 ],
 "2010s" : [
-	{"Event": "Boston Marathon Bombing ", "Year": "2013" ,"BeginDate" :"20130414", "EndDate": "20130417", "Query" :"boston marathon"},
+	{"Event": "Boston Marathon Bombing ", "Year": "2013" ,"BeginDate" :"20130415", "EndDate": "20130417", "Query" :"boston marathon"},
 	{"Event": "Trayvon Martin Tragedy Sparks Black Lives Matter Movement", "Year": "2013" ,"BeginDate" :"20171001", "EndDate": "20171031", "Query" :"black lives matter"},
-	{"Event": "DOMA overturned by Supreme Court", "Year": "2015" ,"BeginDate" :"20150601", "EndDate": "20150630", "Query" :"defense of marriage act "},
-	{"Event": "Gay Marriage Ruled Legal in All 50 States", "Year": "2015" ,"BeginDate" :"20150616", "EndDate": "20150630", "Query" :"gay "},
-	{"Event": "Bob Dylan Wins The Nobel Prize in Literature", "Year": "2015" ,"BeginDate" :"20161012", "EndDate": "20161016", "Query" :"nobel "},
+	{"Event": "Gay Marriage Ruled Legal in All 50 States", "Year": "2015" ,"BeginDate" :"20150616", "EndDate": "20150630", "Query" :"gay"},
+	{"Event": "DOMA overturned by Supreme Court", "Year": "2015" ,"BeginDate" :"20150626", "EndDate": "20150630", "Query" :"defense of marriage act"},
+	{"Event": "Bob Dylan Wins The Nobel Prize in Literature", "Year": "2016" ,"BeginDate" :"20161012", "EndDate": "20161016", "Query" :"nobel"},
 	{"Event": "Trump is President Except Huger", "Year": "2017" ,"BeginDate" :"20170120", "EndDate": "20170122", "Query" :"trump"}
 ]
 }
