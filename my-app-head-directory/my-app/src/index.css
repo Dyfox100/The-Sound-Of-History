@@ -20,10 +20,6 @@ p {
   font-size: 1.5em;
 }
 
-Link {
-    color: white;
-}
-
 .searchPage {
     padding-top: 10%;
     text-align: center;
@@ -35,7 +31,8 @@ Link {
 }
 
 .down {
-    padding-top: 24%;
+    /* position: absolute; */
+    margin-top: 15%;
 }
 
 .search-background {
@@ -44,14 +41,16 @@ Link {
     flex: 1;
     height: 85vh;
 }
-.eventSuggest {
+
+.eventSuggestRender {
     background-color: rgba(247,241,216,0.5);
-    padding-top: 5%;
-    padding-left: 4%;
+    padding-bottom: 2%;
 }
 
 .eventSuggest h1 {
     font-size: 4em;
+    text-align: center;
+    padding: 5% 0 5% 0;
 }
 
 .eventSuggest h2 {
@@ -61,4 +60,12 @@ Link {
 .eventSuggest li {
     font-size: 1.5em;
 
+}
+
+.navBar {
+    color: rgba(193,62,25,1);
+}
+
+.navBar:hover {
+   color: rgba(0,0,0,1);
 }

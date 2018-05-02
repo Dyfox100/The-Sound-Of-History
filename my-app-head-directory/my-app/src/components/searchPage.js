@@ -46,8 +46,10 @@ export class SearchPage extends React.Component {
                     </Container>
                 </div>
                 <ScrollableAnchor id ={'downEvents'}>
-                    <div className="eventSuggest">
-                        <EventSuggest/>
+                    <div className="eventSuggestRender">
+                        <Container>
+                            <EventSuggest/>
+                        </Container>
                     </div>
                 </ScrollableAnchor>
             </div>
@@ -87,7 +89,7 @@ export class SearchBar extends React.Component {
                   onChange={this.updateSearch}
                 />
                 <InputGroupAddon addonType="append">
-                    <Button color="secondary" onClick={this.handleSubmit}>
+                    <Button color="light" onClick={this.handleSubmit}>
                     <NavLink> Search </NavLink> </Button>
                 </InputGroupAddon>
             </InputGroup>
@@ -108,8 +110,8 @@ export class EventSuggest extends React.Component {
 	}
     render(){
         return (
-        	<div>
-        	<h1 className="centerContent">Event Suggestions</h1>
+        	<div className="eventSuggest">
+        	<h1>Event Suggestions</h1>
         		<h2>1960</h2>
         			<div>
         				<ul>
@@ -219,8 +221,6 @@ export class EventSuggest extends React.Component {
         				</ul>
         			</div>
         	</div>
-
-
         );
     }
 }

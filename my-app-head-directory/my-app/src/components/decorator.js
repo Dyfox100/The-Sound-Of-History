@@ -20,7 +20,7 @@ export class NavBar extends React.Component {
                 <Navbar color="white" expand="md">
                     <Nav className="ml-auto navbarFormat">
                         <NavLink>
-                            <Link to={'/'} >Search</Link>
+                            <Link className="navBar" to={'/'} >Search</Link>
                         </NavLink>
                     </Nav>
                 </Navbar>
