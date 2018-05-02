@@ -7,8 +7,9 @@ import { InputGroup, InputGroupAddon, Button, Input, NavLink, Container, Row, Co
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 
 // import components
-import { SearchPage } from './searchPage.js'
-import { EventSuggest } from './eventSuggestPage.js'
+import { SearchPage } from './searchPage.js';
+import { EventSuggest } from './eventSuggestPage.js';
+
 
 // import css files
 import 'bootstrap/dist/css/bootstrap.css';

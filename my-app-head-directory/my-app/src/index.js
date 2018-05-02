@@ -3,7 +3,8 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 
 import WebFont from 'webfontloader';
-import { InputGroup, InputGroupAddon, Button, Input, NavLink, Container, Row, Col, Navbar, Nav, NavItem } from 'reactstrap';
+import { InputGroup, InputGroupAddon, Button, Input, NavLink, Container, Row,
+        Col, Navbar, Nav, NavItem } from 'reactstrap';
 import { BrowserRouter as Router, Route, Link, Switch } from "react-router-dom";
 
 // import components

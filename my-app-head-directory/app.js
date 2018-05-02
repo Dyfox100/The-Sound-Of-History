@@ -5,7 +5,7 @@ var request = require("request");
 var app = express();
 var elasticsearch = require('elasticsearch');
 var client = new elasticsearch.Client({
-    hosts: ['https://52.40.142.247:9200']
+    hosts: ['http://54.245.181.174:9200']
 });
 
 var mongoClient = mongodb.MongoClient;
@@ -20,7 +20,7 @@ mongoClient.connect('mongodb://54.190.43.78:27017', (err, client1) => {
     }
 });
 
-/*client.ping({
+client.ping({
     requestTimeout: 30000,
 }, function(error){
     if (error) {
@@ -28,7 +28,15 @@ mongoClient.connect('mongodb://54.190.43.78:27017', (err, client1) => {
     } else {
         console.log('Everything is okay')
     }
-});*/
+});
+
+client.search({
+    index: "bbtop100",
+    type: "songs",
+    q: "Drake"
+    }
+).then((body) => console.log(body.hits.hits));
+
 
 app.get('/result', (req, res) => {
     //db connection
