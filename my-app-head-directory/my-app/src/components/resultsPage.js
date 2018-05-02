@@ -90,25 +90,26 @@ export class ResultsPage extends React.Component {
     render(){
         return (
             <div>
-
                 <div className="results-banner">
                     <NavBar />
                 </div>
-                <DateBox className="dateBox" date= {this.state.beginDate}/>
-                    <div className="resultsPage">
-                        <Row>
-                        <Col>
-                            <div className="historyBox">
-                                {this.state.headlines &&  <HistoryBox history = {this.state.headlines}/>}
-                            </div>
-                        </Col>
-                            <Col>
-                                <div className="songBox">
-                                    {this.state.songs && <SongBox songs = {this.state.songs}/>}
-                                </div>
-                            </Col>
-                        </Row>
-                    </div>
+                <DateBox date={this.state.beginDate}/>
+                <Container>
+                        <div className="resultsPage">
+                            <Row>
+                                <Col>
+                                    <div className="historyBox">
+                                        {this.state.headlines &&  <HistoryBox history = {this.state.headlines}/>}
+                                    </div>
+                                </Col>
+                                <Col>
+                                    <div className="songBox">
+                                        {this.state.songs && <SongBox songs = {this.state.songs}/>}
+                                    </div>
+                                </Col>
+                            </Row>
+                        </div>
+                </Container>
             </div>
         );
     }
@@ -135,10 +136,10 @@ export class DateBox extends React.Component {
 
     render(){
         return (
-          <div className= "dateBox">
-              <h1>The Sound of {this.parseDates()}</h1>
-              <hr/>
-          </div>
+            <div className= "dateBox">
+                <h1>The Sound of {this.parseDates()}</h1>
+                <hr/>
+            </div>
         );
     }
 }
@@ -189,10 +190,3 @@ export class HistoryBox extends React.Component {
         );
     }
 }
-/*
-WebFont.load({
-    google: {
-        families: ['Playfair Display', 'serif'],
-    }
-
-});*/

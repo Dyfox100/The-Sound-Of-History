@@ -1,3 +1,10 @@
+*,
+*:before,
+*:after{
+   margin: 0;
+   padding: 0;
+}
+
 @font-face {
   font-family: 'Rajdhani', sans-serif;
   src: url("https://fonts.googleapis.com/css?family=Rajdhani:300,400,500,600,700" rel="stylesheet")
@@ -15,33 +22,7 @@
 font-family: 'Rajdhani', sans-serif;
 }
 
-ul {
-    list-style-type: none;
-}
-
-p {
-  font-size: 1.5em;
-}
-.searchPage {
-    padding-top: 10%;
-    text-align: center;
-    color: white;
-}
-.DescriptionBox {
-    text-align: center;
-}
-.NavItem {
-    float: left;
-}
-
-.searchPage img {
-    margin-bottom: 7%;
-}
-
-.down {
-    /* position: absolute; */
-    margin-top: 15%;
-}
+/* Search Page */
 
 .search-background {
     background: url('./img/minimalist.jpg') no-repeat center center;
@@ -49,6 +30,81 @@ p {
     flex: 1;
     height: 85vh;
 }
+
+.searchPage {
+    padding-top: 10%;
+    text-align: center;
+    color: white;
+}
+
+.searchPage img {
+    margin-bottom: 7%;
+}
+
+.down {
+    margin-top: 15%;
+}
+
+.searchBox {
+    width: 750px;
+}
+
+/* Event Suggestions */
+
+.eventSuggestRender {
+    background-color: rgba(247,241,216,0.5);
+    padding-bottom: 2%;
+}
+
+.eventSuggest h1 {
+    font-size: 4em;
+    text-align: center;
+    padding: 5% 0 5% 0;
+}
+
+.eventSuggest h2 {
+    font-size: 2.5em;
+}
+
+.eventSuggest li {
+    font-size: 1.5em;
+
+}
+
+.footer {
+    bottom: 0;
+    background-color: rgba(0,0,0,1);
+    float: bottom;
+    width: 100%;
+    height: 8vh;
+}
+
+.footer footer {
+    padding-top: 1.25%;
+    text-align: center;
+    color: rgba(255,255,255,1);
+}
+
+.formatRow {
+    padding-bottom: 5%
+}
+
+.alignRight ul li{
+    float: right
+}
+
+.alignRight h2 {
+    text-align: right;
+}
+
+.alignImage {
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-end;
+}
+
+/* Results Page */
+
 .results-banner {
     z-index:1;
     background: url('./img/records.jpg') no-repeat center center;
@@ -66,8 +122,6 @@ p {
     top: 38vh;
     width: 100%;
     text-align: center;
-    padding-left: 5%;
-
 }
 
 .song {
@@ -82,59 +136,43 @@ p {
 .dateBox {
     height:5vh;
     top: 20vh;
-    float: top;
     position:fixed;
-    width:100%;
     color: 000;
     background: rgba(255, 255, 255);
     z-index: 1;
-    padding: 3% 0 3% 0;
-    text-align: center;
-}
-.songBox {
-    text-align: center;
-    margin-left: 10%;
-    font-size: 1.2em;
-}
-
-h1 {
-    font-size: 1.75em;
-}
-h2 {
-    font-size: 1.5em;
-    padding-bottom: 2%
+    padding: 3% 0 5% 0;
+    /* algin-items: center; */
+    width: 100%;
 }
 
 .dateBox hr {
     width: 50%;
     height: 10px;
     color: #000;
+    margin-left: 25%;
 }
 
-.eventSuggestRender {
-    background-color: rgba(247,241,216,0.5);
-    padding-bottom: 2%;
-}
-
-.eventSuggest h1 {
-    font-size: 4em;
+.dateBox h1 {
     text-align: center;
-    padding: 5% 0 5% 0;
 }
 
-.eventSuggest h2 {
-    font-size: 1.5em;
+
+.songBox {
+    text-align: center;
+    margin-left: 10%;
+    font-size: 1.2em;
 }
 
-.eventSuggest li {
-    font-size: 1.5em;
+/* Multipage Content */
 
+.links {
+    color: rgba(0,0,0,1);
 }
 
-.navBar {
-    color: rgba(193,62,25,1);
+.links:hover {
+   color: rgba(193,62,25,1);
 }
 
-.navBar:hover {
-   color: rgba(0,0,0,1);
+ul {
+    list-style-type: none;
 }
