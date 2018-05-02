@@ -6,6 +6,7 @@
   "dependencies": {
     "ajv": "^6.4.0",
     "bootstrap": "^4.1.0",
+    "flexbox-react": "^4.4.0",
     "jquery": "^3.3.1",
     "normalize.css": "^8.0.0",
     "react": "^16.3.1",
@@ -13,9 +14,9 @@
     "react-router": "^4.2.0",
     "react-router-dom": "^4.2.2",
     "react-scripts": "^1.1.4",
+    "react-strap": "^0.00.00",
     "reactstrap": "^5.0.0",
-    "webfontloader": "^1.6.28",
-    "react-strap": "^0.00.00"
+    "webfontloader": "^1.6.28"
   },
   "scripts": {
     "start": "react-scripts start",

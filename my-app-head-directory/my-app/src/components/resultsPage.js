@@ -4,6 +4,7 @@ import ReactDOM from 'react-dom';
 
 import WebFont from 'webfontloader';
 import { InputGroup, InputGroupAddon, Button, Input, NavLink } from 'reactstrap';
+import { Container, Row, Col } from "reactstrap";
 
 // import css files
 import '../index.css';

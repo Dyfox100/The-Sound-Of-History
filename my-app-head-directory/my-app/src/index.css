@@ -12,17 +12,11 @@ body {
   margin-bottom:10%;
   margin-top:10%; */
 }
-
-#searchBox {
-   margin-right: 10%;
-   margin-left: 10%;
-}
 .historyBox {
-    align: left;
-    color:Blue;
+    color:blue;
+    margin: 0 auto;
 }
 .songBox {
-    align: center;
     color: green;
 }
 
@@ -30,10 +24,22 @@ body {
     text-align: center;
     font-size: 3em;
 }
+.centerSearch {
+    margin: 0 auto;
+    margin-top: 25%;
+    height: 50%;
+}
 
 ul {
     list-style-type: none;
 }
+.DescriptionBox {
+    text-align: center;
+}
+.NavItem {
+    float: left;
+}
+
 
 /* .title {
   display:block;
@@ -44,4 +50,8 @@ ul {
 
 p {
   font-size: 1em;
+}
+
+centerContent: {
+
 }

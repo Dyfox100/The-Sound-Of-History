@@ -3,7 +3,8 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 
 import WebFont from 'webfontloader';
-import { InputGroup, InputGroupAddon, Button, Input, NavLink } from 'reactstrap';
+import { InputGroup, InputGroupAddon, Button,
+    Col, Row, Container, Input, NavLink } from 'reactstrap';
 import { Redirect } from "react-router-dom";
 
 // import css files
@@ -15,10 +16,10 @@ import 'bootstrap/dist/css/bootstrap.css';
 export class SearchPage extends React.Component {
     render(){
       return (
-        <div>
-          <SearchBar/>
-          <br/>
-          <DescriptionBox/>
+        <div className="centerSearch">
+                <SearchBar/>
+                <br/>
+                <DescriptionBox/>
         </div>
       );
     }
@@ -33,7 +34,7 @@ export class DescriptionBox extends React.Component {
 
     render(){
        return (
-          <div>
+          <div className="DescriptionBox">
              <p>{this.description}</p>
           </div>
        );
