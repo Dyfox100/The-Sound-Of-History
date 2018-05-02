@@ -112,9 +112,6 @@ h2 {
     padding-bottom: 2%
 }
 
-.resultsPage hr {
+.dateBox hr {
     width: 50%;
-    height: 10px;
-    color: #000;
-
 }
