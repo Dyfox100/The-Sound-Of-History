@@ -3,8 +3,9 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 
 import WebFont from 'webfontloader';
-import { InputGroup, InputGroupAddon, Button, Input, NavLink } from 'reactstrap';
+import { InputGroup, InputGroupAddon, Button, Input, NavLink} from 'reactstrap';
 import { Container, Row, Col } from "reactstrap";
+import { NavBar } from './decorator.js';
 
 // import css files
 import '../index.css';
@@ -88,16 +89,27 @@ export class ResultsPage extends React.Component {
     }
     render(){
         return (
-          <div>
-              <DateBox date= {this.state.beginDate}/>
-              <div className="historyBox">
-                {this.state.headlines &&  <HistoryBox history = {this.state.headlines}/>}
-              </div>
-              <br/>
-              <div className="songBox">
-                {this.state.songs && <SongBox songs = {this.state.songs}/>}
-              </div>
-          </div>
+            <div>
+
+                <div className="results-banner">
+                    <NavBar />
+                </div>
+                <DateBox className="dateBox" date= {this.state.beginDate}/>
+                    <div className="resultsPage">
+                        <Row>
+                        <Col>
+                            <div className="historyBox">
+                                {this.state.headlines &&  <HistoryBox history = {this.state.headlines}/>}
+                            </div>
+                        </Col>
+                            <Col>
+                                <div className="songBox">
+                                    {this.state.songs && <SongBox songs = {this.state.songs}/>}
+                                </div>
+                            </Col>
+                        </Row>
+                    </div>
+            </div>
         );
     }
 }
@@ -125,6 +137,7 @@ export class DateBox extends React.Component {
         return (
           <div className= "dateBox">
               <h1>The Sound of {this.parseDates()}</h1>
+              <hr/>
           </div>
         );
     }
@@ -139,12 +152,12 @@ export class SongBox extends React.Component {
     render(){
         return (
           <div className="songsBox">
-            <h1>Top 100 Billboard Chart</h1>
+            <h2>Billboard Chart Top 50</h2>
                 <div>
                     <ol>
                          {
                             this.songs.map((songInfo) => {
-                                return <li>{songInfo.title} by {songInfo.artist}</li>
+                                return <li className="song">{songInfo.title} by {songInfo.artist}</li>
                             })
                       }
                   </ol>
@@ -164,10 +177,10 @@ export class HistoryBox extends React.Component {
     render(){
         return (
             <div className="historyBox">
-            <h1>New York Times Headlines</h1>
+            <h2 className>New York Times Headlines</h2>
                 <ul>{
                         this.history.map((item) => {
-                        return<li> {item} <br/>  </li>
+                        return<li className="history"> {item} <br/> <br/>  </li>
                     })
                 }
                 </ul>

@@ -26,7 +26,6 @@ class Home extends React.Component {
         return (
                 <Router>
                     <div>
-                        <NavBar />
                                 <Switch>
                                         <Route exact={true} path='/' component={ SearchPage } />
                                         <Route exact={true} path='/EventSuggest' component={ EventSuggest } />

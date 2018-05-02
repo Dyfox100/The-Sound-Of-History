@@ -20,7 +20,7 @@ mongoClient.connect('mongodb://54.190.43.78:27017', (err, client1) => {
     }
 });
 
-/*client.ping({
+client.ping({
     requestTimeout: 30000,
 }, function(error){
     if (error) {
@@ -33,10 +33,10 @@ mongoClient.connect('mongodb://54.190.43.78:27017', (err, client1) => {
 client.search({
     index: "bbtop100",
     type: "songs",
-    q: "Drak"
+    q: "Drake"
     }
 ).then((body) => console.log(body.hits.hits));
-*/
+
 
 app.get('/result', (req, res) => {
     //db connection
