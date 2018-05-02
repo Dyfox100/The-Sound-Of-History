@@ -6,7 +6,6 @@ import WebFont from 'webfontloader';
 import { InputGroup, InputGroupAddon, Button, Input, NavLink, Container, Row,
         Col, Navbar, Nav, NavItem } from 'reactstrap';
 import { BrowserRouter as Router, Route, Link, Switch } from "react-router-dom";
-import BackgroundImage from 'react-background-image-loader';
 
 // import components
 import { ResultsPage, HistoryBox, SongBox } from "./components/resultsPage.js";
