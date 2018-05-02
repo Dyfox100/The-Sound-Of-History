@@ -5,7 +5,6 @@ import ReactDOM from 'react-dom';
 import WebFont from 'webfontloader';
 import { InputGroup, InputGroupAddon, Button, Input, NavLink } from 'reactstrap';
 import { Redirect } from "react-router-dom";
-import BackgroundImage from 'react-background-image-loader';
 
 // import css files
 import '../index.css';

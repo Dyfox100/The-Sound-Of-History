@@ -17,7 +17,7 @@ export class NavBar extends React.Component {
     render(){
         return (
             <div>
-                <Navbar expand="md">
+                <Navbar color="white" expand="md">
                     <Nav className="ml-auto navbarFormat">
                         <NavLink>
                             <Link to={'/'} >Search</Link>
