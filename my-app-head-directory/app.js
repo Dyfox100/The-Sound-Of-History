@@ -11,7 +11,7 @@ var client = new elasticsearch.Client({
 var mongoClient = mongodb.MongoClient;
 var mclient;
 
-mongoClient.connect('mongodb://localhost:27017', (err, client1) => {
+mongoClient.connect('mongodb://54.190.43.78:27017', (err, client1) => {
     if (err) {
         throw err;
     } else {
