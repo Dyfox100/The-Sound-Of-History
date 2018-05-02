@@ -8,6 +8,8 @@ import { InputGroup, InputGroupAddon, Button, Input, NavLink, Container } from '
 import { Redirect } from "react-router-dom";
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import { NavBar } from './decorator.js'
+import logo from '../img/TSOH.png'
+import downArrow from '../img/downArrow.png'
 
 
 // Import json Event Suggest file with hardCode
@@ -33,11 +35,13 @@ export class SearchPage extends React.Component {
                 <NavBar />
                 <div className="searchPage search-background">
                     <Container>
-                        <h1>The Sound of History</h1>
+                        <img src={logo} alt="Sound of History" width="80%" />
                         <SearchBar/>
                         <p>Search a date to explore the soundtrack of United States history.</p>
                         <div className="down">
-                            <a href="#downEvents">More Events</a>
+                            <a href="#downEvents">
+                                <img src={downArrow} alt="Down Arrow" width="5%"/>
+                            </a>
                         </div>
                     </Container>
                 </div>

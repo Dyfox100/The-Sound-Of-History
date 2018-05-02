@@ -30,13 +30,12 @@ Link {
     color: white;
 }
 
-.searchPage h1 {
-    font-size: 4em;
-    margin-bottom: 5%;
+.searchPage img {
+    margin-bottom: 7%;
 }
 
 .down {
-    padding-top: 30%;
+    padding-top: 24%;
 }
 
 .search-background {
