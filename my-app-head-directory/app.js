@@ -5,13 +5,13 @@ var request = require("request");
 var app = express();
 var elasticsearch = require('elasticsearch');
 var client = new elasticsearch.Client({
-    hosts: ['https://52.40.142.247:9200']
+    hosts: ['http://54.245.181.174:9200']
 });
 
 var mongoClient = mongodb.MongoClient;
 var mclient;
 
-mongoClient.connect('mongodb://localhost:27017', (err, client1) => {
+mongoClient.connect('mongodb://54.190.43.78:27017', (err, client1) => {
     if (err) {
         throw err;
     } else {
@@ -20,7 +20,7 @@ mongoClient.connect('mongodb://localhost:27017', (err, client1) => {
     }
 });
 
-/*client.ping({
+client.ping({
     requestTimeout: 30000,
 }, function(error){
     if (error) {
@@ -28,7 +28,18 @@ mongoClient.connect('mongodb://localhost:27017', (err, client1) => {
     } else {
         console.log('Everything is okay')
     }
-});*/
+});
+
+client.search({
+    index: "new_bbtop100",
+    type: "songs",
+    body: {
+        
+
+    }
+    }
+).then((body) => console.log(body.hits.hits));
+
 
 app.get('/result', (req, res) => {
     //db connection
@@ -109,7 +120,8 @@ app.get('/result', (req, res) => {
         });
 
     } else {
-        console.log('this is not a date. try again.');
+        //elastic search for song name.
+        client.search
     }
 });
 
