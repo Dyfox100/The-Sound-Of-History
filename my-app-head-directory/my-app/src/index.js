@@ -19,7 +19,6 @@ import { BrowserRouter as Router, Route, Link, Switch } from "react-router-dom";
 // import components
 import { ResultsPage, HistoryBox, SongBox } from "./components/resultsPage.js"
 import { SearchPage } from './components/searchPage.js'
-import { EventSuggest } from './components/eventSuggestPage.js'
 
 // import css files
 import 'bootstrap/dist/css/bootstrap.css';
