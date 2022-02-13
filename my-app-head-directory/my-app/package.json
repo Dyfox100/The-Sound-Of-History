@@ -4,7 +4,7 @@
   "private": true,
   "proxy": "http://localhost:4001",
   "dependencies": {
-    "ajv": "^6.4.0",
+    "ajv": "^6.12.3",
     "bootstrap": "^4.1.0",
     "flexbox-react": "^4.4.0",
     "jquery": "^3.3.1",
